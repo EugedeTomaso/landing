@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radius — AI that works for your business</title>
+  <meta name="description" content="Radius looks at your operations, finds where AI makes a real difference, builds the system on Arc, and runs it.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #050508;
+      --bg-surface: #0d0d12;
+      --bg-elevated: #16161d;
+      --bg-card: #1a1a22;
+      --text-primary: #e8e6e3;
+      --text-secondary: #7a7872;
+      --text-muted: #45443f;
+      --accent: #e63926;
+      --accent-soft: rgba(230, 57, 38, 0.12);
+      --accent-glow: rgba(230, 57, 38, 0.25);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --font-display: 'Bricolage Grotesque', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* ===== GRAIN OVERLAY ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ===== DOT GRID ===== */
+    .dot-grid {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* ===== ANIMATED GRADIENT MESH ===== */
+    .gradient-mesh {
+      position: relative;
+    }
+    .gradient-mesh::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
+      filter: blur(100px);
+      animation: meshFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes meshFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      33% { transform: translate(-80px, 60px) scale(1.1); opacity: 0.6; }
+      66% { transform: translate(40px, -40px) scale(0.95); opacity: 0.35; }
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .font-display { font-family: var(--font-display); }
+    .font-mono { font-family: var(--font-mono); }
+
+    /* ===== SECTION LABEL ===== */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== CARDS ===== */
+    .card-glow {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card-glow:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 40px -10px var(--accent-glow), 0 8px 32px -8px rgba(0,0,0,0.5);
+    }
+
+    /* ===== HERO GRADIENT LINE ===== */
+    .gradient-line {
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 2px;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 5, 8, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ===== LINKS / BUTTONS ===== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px -4px var(--accent-glow);
+    }
+
+    /* ===== ANIMATED SVG ICONS ===== */
+    .anim-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+    .anim-icon path,
+    .anim-icon line,
+    .anim-icon circle,
+    .anim-icon polyline,
+    .anim-icon rect {
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .anim-icon .filled { fill: var(--accent); stroke: none; }
+    .anim-icon .filled-soft { fill: var(--accent-soft); stroke: none; }
+
+    /* Draw-in animation for icon strokes */
+    @keyframes iconDraw {
+      from { stroke-dashoffset: var(--path-len); }
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes iconFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes iconPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    @keyframes iconSpin {
+      from { transform-origin: center; transform: rotate(0deg); }
+      to { transform-origin: center; transform: rotate(360deg); }
+    }
+    @keyframes iconOrbit {
+      from { transform-origin: 12px 12px; transform: rotate(0deg); }
+      to { transform-origin: 12px 12px; transform: rotate(360deg); }
+    }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+    @keyframes iconBlink {
+      0%, 40%, 100% { opacity: 1; }
+      20% { opacity: 0.2; }
+    }
+    @keyframes iconWave {
+      0%, 100% { d: path("M2 12 Q6 8 10 12 Q14 16 18 12 Q22 8 26 12"); }
+      50% { d: path("M2 12 Q6 16 10 12 Q14 8 18 12 Q22 16 26 12"); }
+    }
+    @keyframes barPulse1 {
+      0%, 100% { height: 6px; y: 14px; }
+      50% { height: 12px; y: 8px; }
+    }
+    @keyframes barPulse2 {
+      0%, 100% { height: 10px; y: 10px; }
+      50% { height: 16px; y: 4px; }
+    }
+    @keyframes barPulse3 {
+      0%, 100% { height: 8px; y: 12px; }
+      50% { height: 14px; y: 6px; }
+    }
+
+    /* What Changes card icons */
+    .wc-icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .wc-icon svg { width: 40px; height: 40px; }
+
+    /* ===== FORM ===== */
+    input, textarea {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    input::placeholder, textarea::placeholder {
+      color: var(--text-muted);
+    }
+    textarea { resize: none; }
+    label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* ===== PILLAR CARD ICON ===== */
+    .pillar-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      border-radius: 8px;
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    /* ===== TIMELINE ===== */
+    @keyframes timelineFill {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+    .timeline-fill {
+      animation-play-state: paused !important;
+    }
+    .timeline-fill.active {
+      animation-play-state: running !important;
+    }
+
+    /* ===== PARTICLE FIELD ===== */
+    #particle-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .container { max-width: 100% !important; }
+    }
+    @media (max-width: 768px) {
+      .hero-heading { font-size: 38px !important; letter-spacing: -1px !important; }
+      .section-heading { font-size: 32px !important; }
+      .grid-cols-responsive { grid-template-columns: 1fr !important; }
+      .two-col { flex-direction: column !important; }
+      .px-main { padding-left: 20px !important; padding-right: 20px !important; }
+      .founders-text { font-size: 24px !important; }
+      .workflow-layout { flex-direction: column !important; }
+      .workflow-text { flex: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== PARTICLE FIELD ===== -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 16px 64px; display: flex; align-items: center; justify-content: space-between;">
+      <span class="font-display" style="font-size: 18px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Radius</span>
+      <div style="display: flex; align-items: center; gap: 32px;">
+        <a href="verticals.html" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+          Industries
+        </a>
+        <a href="#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+          Talk to us &rarr;
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="gradient-mesh dot-grid" style="min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 160px 64px 120px;">
+      <div style="max-width: 820px;">
+        <div class="gradient-line reveal" style="margin-bottom: 48px;"></div>
+        <h1 class="font-display hero-heading reveal reveal-delay-1" style="font-size: 64px; font-weight: 800; line-height: 1.05; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 32px;">
+          AI makes your business operate faster, smarter, and at a scale you can't do with people alone.
+        </h1>
+        <p class="reveal reveal-delay-2" style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 560px; margin-bottom: 48px;">
+          We look at your operations, find where AI makes a real difference, build the system, and run it. Same team, one platform, no handoffs.
+        </p>
+        <a href="#contact" class="btn-primary reveal reveal-delay-3">Talk to us</a>
+      </div>
+    </div>
+
+    <!-- Decorative corner element -->
+    <div style="position: absolute; bottom: 64px; right: 64px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; writing-mode: vertical-rl;">
+      Scroll to explore
+    </div>
+  </section>
+
+  <!-- ===== WHAT CHANGES ===== -->
+  <section class="dot-grid" style="background: var(--bg-surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+      <div class="section-label reveal" style="margin-bottom: 64px;">What changes</div>
+
+      <div class="grid-cols-responsive" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border);">
+
+        <!-- 01 Processes -->
+        <div class="reveal reveal-delay-1" style="background: var(--bg-surface); padding: 40px 32px;">
+          <div class="wc-icon anim-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <!-- Looping circuit: self-running process -->
+              <circle cx="20" cy="20" r="12" stroke="var(--accent)" stroke-width="1" stroke-dasharray="4 3" opacity="0.25">
+                <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="20s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="20" cy="20" r="7" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="44" stroke-dashoffset="44">
+                <animate attributeName="stroke-dashoffset" from="44" to="0" dur="1.5s" fill="freeze" begin="0.3s"/>
+              </circle>
+              <!-- Rotating arrows on circle -->
+              <g style="transform-origin: 20px 20px; animation: iconSpin 8s linear infinite;">
+                <path d="M20 8 L22 11 L18 11 Z" fill="var(--accent)" stroke="none"/>
+              </g>
+              <g style="transform-origin: 20px 20px; animation: iconSpin 8s linear infinite;">
+                <path d="M20 32 L18 29 L22 29 Z" fill="var(--accent)" stroke="none"/>
+              </g>
+              <!-- Center dot pulse -->
+              <circle cx="20" cy="20" r="2" fill="var(--accent)" stroke="none">
+                <animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; letter-spacing: -0.5px;">Processes that run themselves.</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--text-secondary);">What's manual today becomes automated. Faster, cheaper, no errors.</p>
+        </div>
+
+        <!-- 02 Teams -->
+        <div class="reveal reveal-delay-2" style="background: var(--bg-surface); padding: 40px 32px;">
+          <div class="wc-icon anim-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <!-- Person silhouette (focus) -->
+              <circle cx="20" cy="12" r="4" stroke="var(--accent)" stroke-width="1.5" fill="none">
+                <animate attributeName="stroke-width" values="1.5;2;1.5" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <path d="M12 28 Q12 20 20 20 Q28 20 28 28" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <!-- Sparkle / focus indicator -->
+              <line x1="32" y1="6" x2="32" y2="10" stroke="var(--accent)" stroke-width="1.5" opacity="0.7">
+                <animate attributeName="opacity" values="0.7;1;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+              </line>
+              <line x1="30" y1="8" x2="34" y2="8" stroke="var(--accent)" stroke-width="1.5" opacity="0.7">
+                <animate attributeName="opacity" values="0.7;1;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+              </line>
+              <!-- Small dismissed items (repetitive work fading away) -->
+              <rect x="4" y="30" width="6" height="1.5" rx="0.75" fill="var(--accent)" opacity="0.15"/>
+              <rect x="4" y="33" width="8" height="1.5" rx="0.75" fill="var(--accent)" opacity="0.1"/>
+              <rect x="4" y="36" width="5" height="1.5" rx="0.75" fill="var(--accent)" opacity="0.06"/>
+            </svg>
+          </div>
+          <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; letter-spacing: -0.5px;">Teams that focus on what matters.</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--text-secondary);">AI handles the repetitive work. Your people do the rest.</p>
+        </div>
+
+        <!-- 03 Decisions -->
+        <div class="reveal reveal-delay-3" style="background: var(--bg-surface); padding: 40px 32px;">
+          <div class="wc-icon anim-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <!-- Live signal / pulse line -->
+              <polyline points="2,24 8,24 12,14 16,30 20,18 24,24 28,24" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="80" stroke-dashoffset="80">
+                <animate attributeName="stroke-dashoffset" from="80" to="0" dur="2s" fill="freeze" begin="0.2s"/>
+              </polyline>
+              <!-- Scanning dot traveling the line -->
+              <circle r="2.5" fill="var(--accent)">
+                <animateMotion dur="3s" repeatCount="indefinite" begin="2.2s" path="M2,24 L8,24 L12,14 L16,30 L20,18 L24,24 L28,24"/>
+                <animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Real-time clock tick -->
+              <circle cx="34" cy="10" r="5" stroke="var(--accent)" stroke-width="1" fill="none" opacity="0.4"/>
+              <line x1="34" y1="10" x2="34" y2="7" stroke="var(--accent)" stroke-width="1.5" opacity="0.6">
+                <animateTransform attributeName="transform" type="rotate" from="0 34 10" to="360 34 10" dur="4s" repeatCount="indefinite"/>
+              </line>
+            </svg>
+          </div>
+          <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; letter-spacing: -0.5px;">Decisions in real time.</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--text-secondary);">Data analyzed as it happens, not at the end of the month.</p>
+        </div>
+
+        <!-- 04 Growth -->
+        <div class="reveal reveal-delay-4" style="background: var(--bg-surface); padding: 40px 32px;">
+          <div class="wc-icon anim-icon">
+            <svg viewBox="0 0 40 40" fill="none">
+              <!-- Ascending bar chart -->
+              <rect x="5" y="28" width="5" height="8" rx="1" fill="var(--accent)" opacity="0.2">
+                <animate attributeName="height" values="8;10;8" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="y" values="28;26;28" dur="3s" repeatCount="indefinite"/>
+              </rect>
+              <rect x="13" y="22" width="5" height="14" rx="1" fill="var(--accent)" opacity="0.35">
+                <animate attributeName="height" values="14;17;14" dur="3s" repeatCount="indefinite" begin="0.3s"/>
+                <animate attributeName="y" values="22;19;22" dur="3s" repeatCount="indefinite" begin="0.3s"/>
+              </rect>
+              <rect x="21" y="16" width="5" height="20" rx="1" fill="var(--accent)" opacity="0.55">
+                <animate attributeName="height" values="20;24;20" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+                <animate attributeName="y" values="16;12;16" dur="3s" repeatCount="indefinite" begin="0.6s"/>
+              </rect>
+              <rect x="29" y="8" width="5" height="28" rx="1" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="height" values="28;32;28" dur="3s" repeatCount="indefinite" begin="0.9s"/>
+                <animate attributeName="y" values="8;4;8" dur="3s" repeatCount="indefinite" begin="0.9s"/>
+              </rect>
+              <!-- Upward arrow -->
+              <path d="M36 6 L36 2 L32 6" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.6">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+              </path>
+            </svg>
+          </div>
+          <h3 class="font-display" style="font-size: 22px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; letter-spacing: -0.5px;">Growth without the bottleneck.</h3>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--text-secondary);">More output from the same operation.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== THE PROCESS ===== -->
+  <section class="gradient-mesh" style="background: var(--bg-deep); position: relative; overflow: hidden;">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="section-label reveal" style="margin-bottom: 24px;">The process</div>
+      <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.15; margin-bottom: 16px; max-width: 600px;">
+        From your operation<br>to a running system.
+      </h2>
+      <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 540px; margin-bottom: 80px;">
+        We don't start with technology. We start with your business. Every engagement follows the same discipline — understand first, then build exactly what's needed.
+      </p>
+
+      <!-- Timeline -->
+      <div style="position: relative;">
+
+        <!-- Animated vertical connector line -->
+        <div class="reveal" style="position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: var(--border); z-index: 0;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, var(--accent), var(--accent)); transform-origin: top; animation: timelineFill 4s ease-out forwards; animation-play-state: paused;" class="timeline-fill"></div>
+        </div>
+
+        <!-- Phase 1: Understand -->
+        <div class="reveal reveal-delay-1" style="display: flex; gap: 40px; margin-bottom: 64px; position: relative;">
+          <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+            <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <!-- Magnifying glass scanning -->
+                <circle cx="10" cy="10" r="6" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+                <line x1="14.5" y1="14.5" x2="20" y2="20" stroke="var(--accent)" stroke-width="1.5"/>
+                <!-- Scanning lines inside lens -->
+                <line x1="6" y1="8" x2="14" y2="8" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                  <animate attributeName="opacity" values="0;0.6;0" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="y1" values="7;13;7" dur="2.5s" repeatCount="indefinite"/>
+                  <animate attributeName="y2" values="7;13;7" dur="2.5s" repeatCount="indefinite"/>
+                </line>
+                <!-- Found dot -->
+                <circle cx="10" cy="10" r="1.5" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </div>
+          </div>
+          <div style="flex: 1; padding-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">01</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Understand</h3>
+            </div>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
+              We sit with your team. Map your operations end to end — the workflows, the handoffs, the bottlenecks, the data. Where do things slow down? Where do people spend time on work that doesn't need a person? Where are decisions delayed because data isn't ready?
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              No assumptions. No templated assessments. We learn your operation as if we were going to run it ourselves — because we are.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 2: Design -->
+        <div class="reveal reveal-delay-2" style="display: flex; gap: 40px; margin-bottom: 64px; position: relative;">
+          <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+            <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <!-- Blueprint / architecture grid -->
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <!-- Blocks being placed -->
+                <rect x="5" y="5" width="6" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0.6;0.6" dur="2s" fill="freeze"/>
+                </rect>
+                <rect x="13" y="5" width="6" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0.4;0.4" dur="2s" fill="freeze"/>
+                </rect>
+                <rect x="5" y="11" width="14" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.3;0.3" dur="2.5s" fill="freeze"/>
+                </rect>
+                <rect x="5" y="17" width="6" height="2" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0;0.2" dur="3s" fill="freeze"/>
+                </rect>
+                <!-- Connection lines between blocks -->
+                <line x1="8" y1="9" x2="8" y2="11" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.5;0.5" dur="2.5s" fill="freeze"/>
+                </line>
+                <line x1="16" y1="9" x2="16" y2="11" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.5;0.5" dur="2.5s" fill="freeze"/>
+                </line>
+              </svg>
+            </div>
+          </div>
+          <div style="flex: 1; padding-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">02</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Design</h3>
+            </div>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
+              We identify where AI creates real leverage — not where it sounds impressive. For each pain point, we define the solution: which agents handle what, what data they need, which workflows automate which processes, how everything connects.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              The architecture is specific to your operation. There's no starter template. Every component exists because your business needs it.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 3: Build -->
+        <div class="reveal reveal-delay-3" style="display: flex; gap: 40px; margin-bottom: 64px; position: relative;">
+          <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+            <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <!-- Terminal / build output -->
+                <rect x="2" y="3" width="20" height="18" rx="3" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.5"/>
+                <!-- Prompt line -->
+                <text x="5" y="11" fill="var(--accent)" font-family="monospace" font-size="6" opacity="0.7">$</text>
+                <!-- Typing cursor -->
+                <rect x="10" y="8" width="1" height="5" fill="var(--accent)">
+                  <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+                </rect>
+                <!-- Build progress lines appearing -->
+                <line x1="5" y1="15" x2="10" y2="15" stroke="var(--accent)" stroke-width="1" opacity="0">
+                  <animate attributeName="opacity" values="0;0.3;0.3" dur="2s" fill="freeze" begin="0.5s"/>
+                  <animate attributeName="x2" values="5;14;14" dur="2s" fill="freeze" begin="0.5s"/>
+                </line>
+                <line x1="5" y1="17.5" x2="10" y2="17.5" stroke="var(--accent)" stroke-width="1" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0.3;0.3" dur="2.5s" fill="freeze" begin="0.5s"/>
+                  <animate attributeName="x2" values="5;5;11;11" dur="2.5s" fill="freeze" begin="0.5s"/>
+                </line>
+                <!-- Success indicator -->
+                <circle cx="19" cy="6" r="2" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.8" dur="3s" fill="freeze" begin="0.5s"/>
+                </circle>
+              </svg>
+            </div>
+          </div>
+          <div style="flex: 1; padding-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">03</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Build</h3>
+            </div>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
+              We build it on Arc. Agents, knowledge bases, automations, integrations — configured, connected, and tested against your real data and real scenarios. Not a proof of concept. The actual system you'll use in production.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              Because we built the platform, there are no limits on what we can configure. If your operation needs it, Arc can do it.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 4: Operate -->
+        <div class="reveal reveal-delay-4" style="display: flex; gap: 40px; position: relative;">
+          <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+            <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <!-- Live dashboard / heartbeat -->
+                <rect x="2" y="3" width="20" height="18" rx="3" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <!-- Heartbeat line -->
+                <polyline points="4,14 7,14 9,8 11,18 13,11 15,14 20,14" stroke="var(--accent)" stroke-width="1.5" fill="none">
+                  <animate attributeName="stroke-dasharray" values="0 100;60 100" dur="2s" fill="freeze"/>
+                </polyline>
+                <!-- Live dot at end of line -->
+                <circle cx="20" cy="14" r="2" fill="var(--accent)">
+                  <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Status bar top -->
+                <circle cx="5" cy="6" r="1" fill="var(--accent)" opacity="0.5">
+                  <animate attributeName="fill" values="var(--accent);var(--accent);var(--accent)" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <line x1="8" y1="6" x2="14" y2="6" stroke="var(--accent)" stroke-width="0.8" opacity="0.25"/>
+              </svg>
+            </div>
+          </div>
+          <div style="flex: 1; padding-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">04</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Operate</h3>
+            </div>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
+              We don't hand you a system and disappear. We run it. Every agent, every workflow, every interaction is monitored. When something underperforms, we fix it — usually before you notice.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              Your system gets better over time because we're watching the data and continuously optimizing. That's the difference between a project and a managed operation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="gradient-mesh" style="background: var(--bg-deep); position: relative; overflow: hidden;">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="section-label reveal" style="margin-bottom: 64px;">How it works</div>
+
+      <!-- Asymmetric intro layout -->
+      <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 96px;">
+        <div style="flex: 1.2;" class="reveal reveal-delay-1">
+          <h2 class="font-display section-heading" style="font-size: 52px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 32px;">
+            Built on<br><span style="color: var(--accent);">Arc</span>
+          </h2>
+        </div>
+        <div style="flex: 1; padding-top: 12px;" class="reveal reveal-delay-2">
+          <p style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 24px;">
+            AI is a powerful technology. But technology alone doesn't transform a business. Between what AI can do and what your company needs, there's a gap — understanding your operation, your data, your bottlenecks, your people.
+          </p>
+          <p style="font-size: 17px; line-height: 1.75; color: var(--text-secondary);">
+            We close that gap. Then we build it on Arc — a single platform where agents, knowledge, automations, and integrations come together. No glue code. One system, fully managed.
+          </p>
+        </div>
+      </div>
+
+      <!-- Workflow Complexity Visual -->
+      <div class="reveal" style="margin-bottom: 80px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 16px; padding: 48px 40px; position: relative; overflow: hidden;">
+        <!-- Subtle background grid for the diagram area -->
+        <div style="position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(230,57,38,0.03) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none;"></div>
+
+        <div class="workflow-layout" style="display: flex; align-items: flex-start; gap: 48px; position: relative; z-index: 1;">
+          <!-- Left: text -->
+          <div class="workflow-text" style="flex: 0 0 280px;">
+            <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; display: block; margin-bottom: 16px;">Workflow Engine</span>
+            <h3 class="font-display" style="font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--text-primary); line-height: 1.2; margin-bottom: 16px;">
+              Complexity<br>is the point.
+            </h3>
+            <p style="font-size: 14px; line-height: 1.7; color: var(--text-secondary);">
+              Branching logic, parallel execution, conditional paths, error recovery, API calls, data transformations — all in one pipeline. No limits on what you can orchestrate.
+            </p>
+          </div>
+
+          <!-- Right: animated workflow diagram -->
+          <div style="flex: 1; min-width: 0;">
+            <svg viewBox="0 0 640 220" fill="none" style="width: 100%; height: auto;" class="anim-icon">
+
+              <!-- ===== Grid nodes ===== -->
+              <!-- START node -->
+              <circle cx="40" cy="110" r="14" stroke="var(--accent)" stroke-width="1.5" fill="var(--bg-card)"/>
+              <polygon points="36,104 36,116 46,110" fill="var(--accent)" opacity="0.8"/>
+
+              <!-- Step 1: Trigger -->
+              <rect x="90" y="92" width="72" height="36" rx="6" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="126" y="114" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="8" text-anchor="middle" letter-spacing="0.05em">TRIGGER</text>
+
+              <!-- Connector: Start → Trigger -->
+              <line x1="54" y1="110" x2="90" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+
+              <!-- Step 2: Validate (diamond) -->
+              <polygon points="210,110 234,88 258,110 234,132" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="234" y="113" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="7" text-anchor="middle">IF</text>
+
+              <!-- Connector: Trigger → Validate -->
+              <line x1="162" y1="110" x2="210" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+
+              <!-- ===== BRANCH: Upper path (condition true) ===== -->
+              <!-- Connector up -->
+              <path d="M234 88 L234 50 L310 50" stroke="var(--accent)" stroke-width="1" opacity="0.3" fill="none"/>
+              <text x="248" y="62" fill="var(--accent)" font-family="var(--font-mono)" font-size="7" opacity="0.6">true</text>
+
+              <!-- Step 3a: API Call -->
+              <rect x="310" y="32" width="72" height="36" rx="6" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="346" y="54" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="8" text-anchor="middle">API CALL</text>
+
+              <!-- Step 4a: Transform -->
+              <rect x="418" y="32" width="72" height="36" rx="6" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="454" y="54" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="8" text-anchor="middle">TRANSFORM</text>
+              <line x1="382" y1="50" x2="418" y2="50" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+
+              <!-- ===== BRANCH: Lower path (condition false) ===== -->
+              <!-- Connector down -->
+              <path d="M234 132 L234 170 L310 170" stroke="var(--accent)" stroke-width="1" opacity="0.3" fill="none"/>
+              <text x="248" y="160" fill="var(--accent)" font-family="var(--font-mono)" font-size="7" opacity="0.6">false</text>
+
+              <!-- Step 3b: LLM Agent -->
+              <rect x="310" y="152" width="72" height="36" rx="6" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="346" y="174" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="8" text-anchor="middle">LLM AGENT</text>
+
+              <!-- Step 4b: Store -->
+              <rect x="418" y="152" width="72" height="36" rx="6" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="454" y="174" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="8" text-anchor="middle">STORE</text>
+              <line x1="382" y1="170" x2="418" y2="170" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+
+              <!-- ===== MERGE point ===== -->
+              <!-- Converge paths -->
+              <path d="M490 50 L530 50 L530 110" stroke="var(--accent)" stroke-width="1" opacity="0.3" fill="none"/>
+              <path d="M490 170 L530 170 L530 110" stroke="var(--accent)" stroke-width="1" opacity="0.3" fill="none"/>
+
+              <!-- Merge diamond -->
+              <polygon points="530,96 544,110 530,124 516,110" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.9"/>
+              <circle cx="530" cy="110" r="3" fill="var(--accent)" opacity="0.5"/>
+
+              <!-- Final step: Output -->
+              <rect x="570" y="92" width="56" height="36" rx="6" stroke="var(--accent)" stroke-width="1.5" fill="var(--bg-card)" opacity="0.9"/>
+              <text x="598" y="114" fill="var(--accent)" font-family="var(--font-mono)" font-size="8" text-anchor="middle" font-weight="600">OUTPUT</text>
+              <line x1="544" y1="110" x2="570" y2="110" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+
+              <!-- ===== Error path (dashed, branching from API CALL) ===== -->
+              <path d="M346 68 L346 200 L454 200 L454 188" stroke="var(--accent)" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.2" fill="none"/>
+              <text x="360" y="198" fill="var(--accent)" font-family="var(--font-mono)" font-size="6" opacity="0.35">on_error</text>
+
+              <!-- ===== Parallel indicator lines ===== -->
+              <line x1="298" y1="40" x2="298" y2="60" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
+              <line x1="302" y1="40" x2="302" y2="60" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
+              <line x1="298" y1="160" x2="298" y2="180" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
+              <line x1="302" y1="160" x2="302" y2="180" stroke="var(--accent)" stroke-width="2" opacity="0.15"/>
+
+              <!-- ===== ANIMATED DATA PACKETS ===== -->
+
+              <!-- Packet 1: Start → Trigger → Validate → Upper path → Merge → Output -->
+              <circle r="4" fill="var(--accent)" opacity="0">
+                <animateMotion dur="6s" repeatCount="indefinite"
+                  path="M40,110 L126,110 L234,110 L234,50 L346,50 L454,50 L530,50 L530,110 L598,110"
+                  keyPoints="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  keyTimes="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  calcMode="linear"/>
+                <animate attributeName="opacity" values="0;0.9;0.9;0.9;0.9;0.9;0.9;0.9;0" dur="6s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Glow trail for packet 1 -->
+              <circle r="8" fill="var(--accent)" opacity="0">
+                <animateMotion dur="6s" repeatCount="indefinite"
+                  path="M40,110 L126,110 L234,110 L234,50 L346,50 L454,50 L530,50 L530,110 L598,110"
+                  keyPoints="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  keyTimes="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  calcMode="linear"/>
+                <animate attributeName="opacity" values="0;0.12;0.12;0.12;0.12;0.12;0.12;0.12;0" dur="6s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- Packet 2: Start → Trigger → Validate → Lower path → Merge → Output (delayed) -->
+              <circle r="4" fill="var(--accent)" opacity="0">
+                <animateMotion dur="6s" repeatCount="indefinite" begin="2.5s"
+                  path="M40,110 L126,110 L234,110 L234,170 L346,170 L454,170 L530,170 L530,110 L598,110"
+                  keyPoints="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  keyTimes="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  calcMode="linear"/>
+                <animate attributeName="opacity" values="0;0.9;0.9;0.9;0.9;0.9;0.9;0.9;0" dur="6s" repeatCount="indefinite" begin="2.5s"/>
+              </circle>
+              <circle r="8" fill="var(--accent)" opacity="0">
+                <animateMotion dur="6s" repeatCount="indefinite" begin="2.5s"
+                  path="M40,110 L126,110 L234,110 L234,170 L346,170 L454,170 L530,170 L530,110 L598,110"
+                  keyPoints="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  keyTimes="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  calcMode="linear"/>
+                <animate attributeName="opacity" values="0;0.12;0.12;0.12;0.12;0.12;0.12;0.12;0" dur="6s" repeatCount="indefinite" begin="2.5s"/>
+              </circle>
+
+              <!-- Packet 3: a faster one taking upper path (different timing) -->
+              <circle r="3" fill="var(--accent)" opacity="0">
+                <animateMotion dur="4.5s" repeatCount="indefinite" begin="4.5s"
+                  path="M40,110 L126,110 L234,110 L234,50 L346,50 L454,50 L530,50 L530,110 L598,110"
+                  keyPoints="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  keyTimes="0;0.12;0.28;0.38;0.55;0.7;0.82;0.9;1"
+                  calcMode="linear"/>
+                <animate attributeName="opacity" values="0;0.6;0.6;0.6;0.6;0.6;0.6;0.6;0" dur="4.5s" repeatCount="indefinite" begin="4.5s"/>
+              </circle>
+
+              <!-- ===== Node status indicators (blinking active dots) ===== -->
+              <circle cx="126" cy="92" r="2.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0;0" dur="6s" repeatCount="indefinite" begin="0.6s"/>
+              </circle>
+              <circle cx="234" cy="88" r="2.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0.8;0" dur="6s" repeatCount="indefinite" begin="0.6s"/>
+              </circle>
+              <circle cx="346" cy="32" r="2.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;0.8;0" dur="6s" repeatCount="indefinite" begin="0.6s"/>
+              </circle>
+              <circle cx="598" cy="92" r="2.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;0;0;0.8;0" dur="6s" repeatCount="indefinite" begin="0.6s"/>
+              </circle>
+
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pillar Cards -->
+      <div class="grid-cols-responsive" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
+
+        <!-- Agents -->
+        <div class="card-glow reveal reveal-delay-1" style="padding: 36px 28px; border-radius: 12px;">
+          <div class="pillar-icon anim-icon" style="margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <!-- Neural node network -->
+              <circle cx="12" cy="6" r="2" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <circle cx="5" cy="16" r="2" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <circle cx="19" cy="16" r="2" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <!-- Connections -->
+              <line x1="12" y1="8" x2="5" y2="14" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="12" y1="8" x2="19" y2="14" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="7" y1="16" x2="17" y2="16" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <!-- Traveling signal dots -->
+              <circle r="1.2" fill="var(--accent)">
+                <animateMotion dur="2.5s" repeatCount="indefinite" path="M12,6 L5,16"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite"/>
+              </circle>
+              <circle r="1.2" fill="var(--accent)">
+                <animateMotion dur="2s" repeatCount="indefinite" path="M5,16 L19,16" begin="0.8s"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+              </circle>
+              <circle r="1.2" fill="var(--accent)">
+                <animateMotion dur="2.2s" repeatCount="indefinite" path="M19,16 L12,6" begin="1.4s"/>
+                <animate attributeName="opacity" values="0;1;1;0" dur="2.2s" repeatCount="indefinite" begin="1.4s"/>
+              </circle>
+              <!-- Center brain dot -->
+              <circle cx="12" cy="12" r="1.5" fill="var(--accent)" opacity="0.3">
+                <animate attributeName="r" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0.15;0.3" dur="3s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <h4 class="font-display" style="font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Agents</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">AI that routes, classifies, and responds based on context.</p>
+        </div>
+
+        <!-- Knowledge -->
+        <div class="card-glow reveal reveal-delay-2" style="padding: 36px 28px; border-radius: 12px;">
+          <div class="pillar-icon anim-icon" style="margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <!-- Stacked layers / data planes -->
+              <ellipse cx="12" cy="7" rx="9" ry="3" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <path d="M3 7 v4 c0 1.66 4.03 3 9 3 s9-1.34 9-3 V7" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.6"/>
+              <path d="M3 11 v4 c0 1.66 4.03 3 9 3 s9-1.34 9-3 V11" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.35"/>
+              <!-- Search / index scan line -->
+              <line x1="3" y1="7" x2="21" y2="7" stroke="var(--accent)" stroke-width="2" opacity="0.5">
+                <animate attributeName="y1" values="7;11;15;7" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="y2" values="7;11;15;7" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.5;0.8;0.3;0.5" dur="4s" repeatCount="indefinite"/>
+              </line>
+              <!-- Data particle -->
+              <circle cx="12" cy="7" r="1" fill="var(--accent)">
+                <animate attributeName="cy" values="7;11;15;7" dur="4s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="1;0.7;0.4;1" dur="4s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <h4 class="font-display" style="font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Knowledge</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">Your data, indexed and searchable in real time.</p>
+        </div>
+
+        <!-- Automation -->
+        <div class="card-glow reveal reveal-delay-3" style="padding: 36px 28px; border-radius: 12px;">
+          <div class="pillar-icon anim-icon" style="margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <!-- Flow: step nodes connected by lines -->
+              <rect x="2" y="4" width="6" height="5" rx="1.5" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <rect x="9" y="10" width="6" height="5" rx="1.5" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <rect x="16" y="16" width="6" height="5" rx="1.5" stroke="var(--accent)" stroke-width="1.5" fill="none"/>
+              <!-- Step connectors -->
+              <path d="M8 8 L9 10" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <path d="M15 14 L16 16" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <!-- Flowing signal through steps -->
+              <circle r="1.5" fill="var(--accent)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M5,6.5 L5,6.5 Q8.5,9 12,12.5 Q15.5,15 19,18.5"/>
+                <animate attributeName="opacity" values="0;1;1;1;0" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Checkmarks appearing in completed steps -->
+              <path d="M3.5 6.5 L4.5 7.5 L6.5 5" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0">
+                <animate attributeName="opacity" values="0;0;1;1;0" dur="3s" repeatCount="indefinite"/>
+              </path>
+              <path d="M10.5 12.5 L11.5 13.5 L13.5 11" stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;1;0" dur="3s" repeatCount="indefinite"/>
+              </path>
+            </svg>
+          </div>
+          <h4 class="font-display" style="font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Automation</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">Multi-step workflows that execute without intervention.</p>
+        </div>
+      </div>
+      <div class="grid-cols-responsive" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+
+        <!-- Channels -->
+        <div class="card-glow reveal reveal-delay-1" style="padding: 36px 28px; border-radius: 12px;">
+          <div class="pillar-icon anim-icon" style="margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <!-- Center hub -->
+              <circle cx="12" cy="12" r="3" stroke="var(--accent)" stroke-width="1.5" fill="none">
+                <animate attributeName="r" values="3;3.5;3" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Orbiting channel endpoints -->
+              <circle cx="12" cy="3" r="1.5" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="21" cy="12" r="1.5" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+              </circle>
+              <circle cx="12" cy="21" r="1.5" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" begin="1s"/>
+              </circle>
+              <circle cx="3" cy="12" r="1.5" fill="var(--accent)" opacity="0.8">
+                <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+              </circle>
+              <!-- Connection lines -->
+              <line x1="12" y1="4.5" x2="12" y2="9" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+              <line x1="19.5" y1="12" x2="15" y2="12" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+              <line x1="12" y1="15" x2="12" y2="19.5" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+              <line x1="4.5" y1="12" x2="9" y2="12" stroke="var(--accent)" stroke-width="1" opacity="0.3"/>
+              <!-- Data pulses inward -->
+              <circle r="1" fill="var(--accent)" opacity="0">
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M12,4.5 L12,9"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
+              <circle r="1" fill="var(--accent)" opacity="0">
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M19.5,12 L15,12" begin="0.4s"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+              </circle>
+              <circle r="1" fill="var(--accent)" opacity="0">
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M12,19.5 L12,15" begin="0.8s"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite" begin="0.8s"/>
+              </circle>
+              <circle r="1" fill="var(--accent)" opacity="0">
+                <animateMotion dur="1.5s" repeatCount="indefinite" path="M4.5,12 L9,12" begin="1.2s"/>
+                <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite" begin="1.2s"/>
+              </circle>
+            </svg>
+          </div>
+          <h4 class="font-display" style="font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Channels</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">Slack, WhatsApp, web, API. One system, every channel.</p>
+        </div>
+
+        <!-- Measurement -->
+        <div class="card-glow reveal reveal-delay-2" style="padding: 36px 28px; border-radius: 12px;">
+          <div class="pillar-icon anim-icon" style="margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" fill="none">
+              <!-- Gauge arc -->
+              <path d="M4 18 A10 10 0 0 1 20 18" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.3"/>
+              <!-- Gauge tick marks -->
+              <line x1="4" y1="18" x2="5.5" y2="17" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="6" y1="11" x2="7.2" y2="11.8" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="12" y1="8" x2="12" y2="9.5" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="18" y1="11" x2="16.8" y2="11.8" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <line x1="20" y1="18" x2="18.5" y2="17" stroke="var(--accent)" stroke-width="1" opacity="0.4"/>
+              <!-- Animated needle -->
+              <line x1="12" y1="18" x2="12" y2="10" stroke="var(--accent)" stroke-width="2">
+                <animateTransform attributeName="transform" type="rotate" values="-40 12 18;30 12 18;20 12 18" dur="4s" repeatCount="indefinite"/>
+              </line>
+              <!-- Center pivot -->
+              <circle cx="12" cy="18" r="2" fill="var(--accent)" opacity="0.8"/>
+              <!-- Status glow -->
+              <circle cx="12" cy="18" r="4" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0.15;0" dur="2s" repeatCount="indefinite"/>
+                <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+          <h4 class="font-display" style="font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Measurement</h4>
+          <p style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">Every interaction tracked. If it's not working, we know.</p>
+        </div>
+
+        <div style="border-radius: 12px;"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== WHY IT WORKS ===== -->
+  <section style="background: var(--bg-surface); border-top: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="section-label reveal" style="margin-bottom: 64px;">Why it works</div>
+
+      <!-- Statement 1 -->
+      <div class="reveal" style="border-bottom: 1px solid var(--border); padding-bottom: 64px; margin-bottom: 64px;">
+        <div class="two-col" style="display: flex; gap: 80px; align-items: baseline;">
+          <div style="flex: 0 0 auto;">
+            <span class="font-mono" style="font-size: 64px; font-weight: 600; color: var(--accent); opacity: 0.15; line-height: 1;">01</span>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="font-display" style="font-size: 36px; font-weight: 800; color: var(--text-primary); letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 20px;">
+              We own the technology.
+            </h3>
+            <p style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 560px;">
+              Arc is built by us, from the ground up. That means no vendor limitations, no rigid templates. Every system is shaped to fit your operation exactly.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statement 2 -->
+      <div class="reveal" style="border-bottom: 1px solid var(--border); padding-bottom: 64px; margin-bottom: 64px;">
+        <div class="two-col" style="display: flex; gap: 80px; align-items: baseline;">
+          <div style="flex: 0 0 auto;">
+            <span class="font-mono" style="font-size: 64px; font-weight: 600; color: var(--accent); opacity: 0.15; line-height: 1;">02</span>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="font-display" style="font-size: 36px; font-weight: 800; color: var(--text-primary); letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 20px;">
+              One team, end to end.
+            </h3>
+            <p style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 560px;">
+              The people who understand your operation are the same people who build and run the system. No handoffs, no lost context.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statement 3 -->
+      <div class="reveal">
+        <div class="two-col" style="display: flex; gap: 80px; align-items: baseline;">
+          <div style="flex: 0 0 auto;">
+            <span class="font-mono" style="font-size: 64px; font-weight: 600; color: var(--accent); opacity: 0.15; line-height: 1;">03</span>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="font-display" style="font-size: 36px; font-weight: 800; color: var(--text-primary); letter-spacing: -1.5px; line-height: 1.2; margin-bottom: 20px;">
+              Everything is measured.
+            </h3>
+            <p style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 560px;">
+              Every agent, every response, every workflow has metrics. We don't guess if it's working. We know. And when it's not, we fix it before you notice.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== WHO WE ARE ===== -->
+  <section class="dot-grid" style="background: var(--bg-deep); border-top: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+      <div class="section-label reveal" style="margin-bottom: 64px;">Who we are</div>
+
+      <div style="max-width: 800px;">
+        <p class="font-display founders-text reveal reveal-delay-1" style="font-size: 32px; font-weight: 700; line-height: 1.4; letter-spacing: -1px; color: var(--text-primary); margin-bottom: 32px;">
+          Two engineers. Fifteen years building and shipping software. We've scaled teams, built platforms, and delivered systems across the Americas for companies of every size.
+        </p>
+        <p class="reveal reveal-delay-2" style="font-size: 18px; line-height: 1.7; color: var(--text-secondary);">
+          We got into AI because we're good at making complex things work. That's it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" style="background: var(--bg-surface); border-top: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+      <div class="section-label reveal" style="margin-bottom: 64px;">Get in touch</div>
+
+      <div class="two-col" style="display: flex; gap: 80px;">
+        <!-- Left -->
+        <div style="flex: 1;" class="reveal reveal-delay-1">
+          <h2 class="font-display section-heading" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.15; margin-bottom: 32px;">
+            If you have an operational problem you think AI can solve, let's talk.
+          </h2>
+          <div style="margin-top: 48px;">
+            <span style="font-size: 14px; color: var(--text-muted);">Prefer email? </span>
+            <a href="mailto:hello@radius.ai" style="font-family: var(--font-mono); font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-soft); transition: border-color 0.3s;"
+               onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--accent-soft)'">
+              hello@radius.ai
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div style="flex: 1;" class="reveal reveal-delay-2">
+          <form style="display: flex; flex-direction: column; gap: 24px;">
+            <div>
+              <label>Name</label>
+              <input type="text" placeholder="Your full name">
+            </div>
+            <div>
+              <label>Company</label>
+              <input type="text" placeholder="Your company name">
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" placeholder="you@company.com">
+            </div>
+            <div>
+              <label>Your challenge</label>
+              <textarea rows="4" placeholder="What are you trying to solve?"></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; height: 52px;">Talk to us</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background: var(--bg-deep); border-top: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 40px 64px; display: flex; align-items: center; justify-content: space-between;">
+      <span class="font-display" style="font-size: 16px; font-weight: 700; color: var(--text-primary);">Radius</span>
+      <div style="display: flex; align-items: center; gap: 32px;">
+        <span class="font-mono" style="font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em;">Built with Arc</span>
+        <a href="mailto:hello@radius.ai" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">hello@radius.ai</a>
+        <span style="font-size: 13px; color: var(--text-muted);">&copy; 2026 Radius</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Timeline fill activation
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.timeline-fill').forEach(el => timelineObserver.observe(el));
+
+    // ===== PARTICLE FIELD =====
+    (function() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, scrollY = 0, particles = [];
+      let occlusionRects = [];
+
+      const LAYERS = [
+        { count: 35, size: [1, 2.2],   glow: 6,  opacity: [0.12, 0.25], parallax: 0.03, drift: 0.15 },
+        { count: 20, size: [1.8, 3.5], glow: 10, opacity: [0.18, 0.35], parallax: 0.15, drift: 0.25 },
+        { count: 10, size: [3, 5.5],   glow: 18, opacity: [0.22, 0.45], parallax: 0.40, drift: 0.35 }
+      ];
+
+      // Elements that particles should disappear behind
+      const OCCLUSION_SELECTORS = [
+        'h1', 'h2', 'h3', 'p', '.section-label', '.btn-primary',
+        '.card-glow', '.anim-icon', '.wc-icon', '.pillar-icon',
+        'form', '.workflow-svg-wrap', 'nav', 'footer',
+        '.founders-frame', '.step-card', '.pillar-card',
+        '.wc-card', '.timeline-step', '.editorial-item'
+      ].join(',');
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function updateOcclusionRects() {
+        occlusionRects = [];
+        const els = document.querySelectorAll(OCCLUSION_SELECTORS);
+        for (let i = 0; i < els.length; i++) {
+          const r = els[i].getBoundingClientRect();
+          if (r.bottom < -50 || r.top > H + 50 || r.width === 0) continue;
+          occlusionRects.push({ l: r.left - 8, t: r.top - 8, r: r.right + 8, b: r.bottom + 8 });
+        }
+      }
+
+      // Update rects periodically (not every frame — too expensive)
+      setInterval(updateOcclusionRects, 200);
+
+      function isOccluded(px, py) {
+        for (let i = 0; i < occlusionRects.length; i++) {
+          const r = occlusionRects[i];
+          if (px >= r.l && px <= r.r && py >= r.t && py <= r.b) return true;
+        }
+        return false;
+      }
+
+      function createParticles() {
+        particles = [];
+        LAYERS.forEach((layer) => {
+          const spread = H * (2 + layer.parallax * 10);
+          for (let i = 0; i < layer.count; i++) {
+            particles.push({
+              baseX: rand(0, W),
+              baseY: rand(-spread * 0.3, spread),
+              size: rand(layer.size[0], layer.size[1]),
+              glow: layer.glow,
+              opacity: rand(layer.opacity[0], layer.opacity[1]),
+              parallax: layer.parallax,
+              phase: rand(0, Math.PI * 2),
+              phaseY: rand(0, Math.PI * 2),
+              driftSpeed: rand(0.12, 0.35),
+              driftSpeedY: rand(0.08, 0.28),
+              driftAmp: rand(30, 90) * layer.drift,
+              driftAmpY: rand(20, 60) * layer.drift,
+              yDrift: rand(-0.03, -0.008) * layer.drift,
+              occAlpha: 1 // smooth fade for occlusion
+            });
+          }
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const t = performance.now() * 0.001;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          const dx = Math.sin(t * p.driftSpeed + p.phase) * p.driftAmp;
+          const dy = Math.cos(t * p.driftSpeedY + p.phaseY) * p.driftAmpY;
+          p.baseY += p.yDrift;
+
+          const y = p.baseY - scrollY * p.parallax + dy;
+
+          const spread = H * (2 + p.parallax * 10);
+          if (p.baseY < -spread * 0.3 - 50) p.baseY = spread;
+          if (p.baseY > spread + 50) p.baseY = -spread * 0.3;
+
+          if (y < -30 || y > H + 30) continue;
+
+          const x = p.baseX + dx;
+          const drawX = ((x % W) + W) % W;
+
+          // Smooth occlusion fade
+          const hidden = isOccluded(drawX, y);
+          p.occAlpha += (hidden ? -0.08 : 0.06);
+          if (p.occAlpha < 0) p.occAlpha = 0;
+          if (p.occAlpha > 1) p.occAlpha = 1;
+          if (p.occAlpha < 0.01) continue;
+
+          const pulse = 0.7 + 0.3 * Math.sin(t * 1.2 + p.phase);
+          const alpha = p.opacity * pulse * p.occAlpha;
+
+          // Glow halo
+          const grad = ctx.createRadialGradient(drawX, y, 0, drawX, y, p.size + p.glow);
+          grad.addColorStop(0, `rgba(230, 57, 38, ${alpha})`);
+          grad.addColorStop(0.3, `rgba(230, 57, 38, ${alpha * 0.4})`);
+          grad.addColorStop(1, `rgba(230, 57, 38, 0)`);
+          ctx.beginPath();
+          ctx.arc(drawX, y, p.size + p.glow, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          // Solid core
+          ctx.beginPath();
+          ctx.arc(drawX, y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(230, 57, 38, ${alpha})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); createParticles(); });
+      window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+      resize();
+      createParticles();
+      updateOcclusionRects();
+      draw();
+    })();
+  </script>
+
+</body>
+</html>

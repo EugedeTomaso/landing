@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radius — AI by Industry</title>
+  <meta name="description" content="How AI transforms operations across fintech, healthcare, retail, and logistics. Real applications, not theory.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #050508;
+      --bg-surface: #0d0d12;
+      --bg-elevated: #16161d;
+      --bg-card: #1a1a22;
+      --text-primary: #e8e6e3;
+      --text-secondary: #7a7872;
+      --text-muted: #45443f;
+      --accent: #e63926;
+      --accent-soft: rgba(230, 57, 38, 0.12);
+      --accent-glow: rgba(230, 57, 38, 0.25);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --font-display: 'Bricolage Grotesque', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .dot-grid {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .gradient-mesh { position: relative; }
+    .gradient-mesh::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
+      filter: blur(100px);
+      animation: meshFloat 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes meshFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      33% { transform: translate(-80px, 60px) scale(1.1); opacity: 0.6; }
+      66% { transform: translate(40px, -40px) scale(0.95); opacity: 0.35; }
+    }
+
+    .font-display { font-family: var(--font-display); }
+    .font-mono { font-family: var(--font-mono); }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    .gradient-line {
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      border-radius: 2px;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 5, 8, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px -4px var(--accent-glow);
+    }
+
+    .anim-icon svg { width: 100%; height: 100%; }
+    .anim-icon path, .anim-icon line, .anim-icon circle, .anim-icon polyline, .anim-icon rect {
+      stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Vertical section */
+    .vertical-section {
+      border-top: 1px solid var(--border);
+    }
+    .vertical-section:nth-child(even) {
+      background: var(--bg-surface);
+    }
+    .vertical-section:nth-child(odd) {
+      background: var(--bg-deep);
+    }
+
+    /* Use-case tags */
+    .use-case-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      padding: 8px 14px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .use-case-tag:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+    }
+    .use-case-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+
+    /* Application blocks */
+    .app-block {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .app-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    /* ===== PARTICLE FIELD ===== */
+    #particle-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    @media (max-width: 768px) {
+      .hero-heading { font-size: 38px !important; letter-spacing: -1px !important; }
+      .section-heading { font-size: 32px !important; }
+      .two-col { flex-direction: column !important; gap: 40px !important; }
+      .px-main { padding-left: 20px !important; padding-right: 20px !important; }
+      .use-case-grid { gap: 8px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== PARTICLE FIELD ===== -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav>
+    <div style="max-width: 1280px; margin: 0 auto; padding: 16px 64px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" class="font-display" style="font-size: 18px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; text-decoration: none;">Radius</a>
+      <div style="display: flex; align-items: center; gap: 32px;">
+        <span class="font-mono" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Industries</span>
+        <a href="index.html#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+          Talk to us &rarr;
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="gradient-mesh dot-grid" style="min-height: 70vh; display: flex; align-items: center; position: relative; overflow: hidden;">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 160px 64px 100px;">
+      <div style="max-width: 780px;">
+        <div class="gradient-line reveal" style="margin-bottom: 48px;"></div>
+        <h1 class="font-display hero-heading reveal reveal-delay-1" style="font-size: 56px; font-weight: 800; line-height: 1.1; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 32px;">
+          AI doesn't work the same way in every industry.<br>
+          <span style="color: var(--text-secondary);">That's the point.</span>
+        </h1>
+        <p class="reveal reveal-delay-2" style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 560px;">
+          Every industry has different operations, different data, different bottlenecks. We learn the specifics of yours before building anything. Here's what that looks like in practice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FINTECH & BANKING ===== -->
+  <section class="vertical-section">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
+        <div style="flex: 1.1;">
+          <div class="section-label reveal" style="margin-bottom: 24px;">Fintech & Banking</div>
+          <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
+            Compliance is slow.<br>AI makes it instant.
+          </h2>
+          <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
+            Financial services are drowning in manual review — KYC, transaction monitoring, document verification. These are pattern-recognition tasks at scale. That's exactly what AI is built for.
+          </p>
+        </div>
+        <div style="flex: 1; padding-top: 48px;">
+          <div class="anim-icon reveal reveal-delay-2" style="width: 100%; max-width: 320px; margin: 0 auto;">
+            <svg viewBox="0 0 200 160" fill="none">
+              <!-- Shield outline -->
+              <path d="M100 10 L160 40 L160 90 C160 120 130 145 100 155 C70 145 40 120 40 90 L40 40 Z" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.2"/>
+              <!-- Inner scanning lines -->
+              <line x1="60" y1="60" x2="140" y2="60" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                <animate attributeName="opacity" values="0;0.4;0" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="y1" values="50;110;50" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="y2" values="50;110;50" dur="3s" repeatCount="indefinite"/>
+              </line>
+              <!-- Document flow -->
+              <rect x="75" y="55" width="20" height="26" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.6"/>
+              <line x1="80" y1="62" x2="90" y2="62" stroke="var(--accent)" stroke-width="0.8" opacity="0.4"/>
+              <line x1="80" y1="66" x2="88" y2="66" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <line x1="80" y1="70" x2="91" y2="70" stroke="var(--accent)" stroke-width="0.8" opacity="0.3"/>
+              <!-- Checkmark appearing -->
+              <path d="M88 90 L95 97 L112 80" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-dasharray="40" stroke-dashoffset="40">
+                <animate attributeName="stroke-dashoffset" values="40;0;0;40" dur="4s" repeatCount="indefinite"/>
+              </path>
+              <!-- Data particles rising -->
+              <circle cx="85" cy="120" r="1.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="cy" values="120;50;50" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;0.6;0" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="100" cy="130" r="1" fill="var(--accent)" opacity="0">
+                <animate attributeName="cy" values="130;45;45" dur="3.5s" repeatCount="indefinite" begin="0.8s"/>
+                <animate attributeName="opacity" values="0;0.4;0" dur="3.5s" repeatCount="indefinite" begin="0.8s"/>
+              </circle>
+              <circle cx="115" cy="125" r="1.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="cy" values="125;55;55" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+                <animate attributeName="opacity" values="0;0.5;0" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+              </circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications -->
+      <div class="reveal" style="margin-bottom: 0;">
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">KYC & Onboarding</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Document extraction, identity verification, risk scoring — automated end to end. What takes a compliance team hours happens in seconds. The agent reads the document, cross-references against watchlists, flags anomalies, and produces a decision-ready report.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Transaction Monitoring</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Real-time pattern analysis across transaction streams. Instead of batch reports at end of day, AI flags suspicious activity as it happens — velocity anomalies, geographic inconsistencies, behavioral deviations. Fewer false positives, faster response.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Customer Operations</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Account inquiries, dispute resolution, product questions — an AI agent that knows your products, your policies, and your customer's history. Handles the repetitive volume. Escalates what actually needs a human.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== HEALTHCARE ===== -->
+  <section class="vertical-section">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
+        <div style="flex: 1.1;">
+          <div class="section-label reveal" style="margin-bottom: 24px;">Healthcare</div>
+          <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
+            Clinicians shouldn't spend their time on paperwork.
+          </h2>
+          <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
+            Healthcare operations are heavy on documentation, triage, and coordination. Most of that work follows predictable patterns — the kind AI handles well. We put clinicians back on clinical work.
+          </p>
+        </div>
+        <div style="flex: 1; padding-top: 48px;">
+          <div class="anim-icon reveal reveal-delay-2" style="width: 100%; max-width: 320px; margin: 0 auto;">
+            <svg viewBox="0 0 200 160" fill="none">
+              <!-- Heart rate monitor frame -->
+              <rect x="30" y="30" width="140" height="100" rx="8" stroke="var(--accent)" stroke-width="1" fill="none" opacity="0.15"/>
+              <!-- Heartbeat line -->
+              <polyline points="30,85 55,85 65,85 72,55 80,110 88,70 95,85 120,85 130,85 137,55 145,110 153,70 160,85 170,85" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="200" stroke-dashoffset="200">
+                <animate attributeName="stroke-dashoffset" values="200;0" dur="3s" repeatCount="indefinite"/>
+              </polyline>
+              <!-- Pulse dot -->
+              <circle r="3" fill="var(--accent)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M30,85 L55,85 L65,85 L72,55 L80,110 L88,70 L95,85 L120,85 L130,85 L137,55 L145,110 L153,70 L160,85 L170,85"/>
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="0.5s" repeatCount="indefinite"/>
+              </circle>
+              <!-- Status indicators -->
+              <circle cx="45" cy="42" r="3" fill="var(--accent)" opacity="0.5">
+                <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <line x1="52" y1="42" x2="80" y2="42" stroke="var(--accent)" stroke-width="0.8" opacity="0.2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Patient Triage</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                AI that reads symptoms, medical history, and urgency signals to route patients correctly. Not a replacement for clinical judgment — a filter that ensures the right cases get to the right people faster. Works across chat, phone intake, and web forms.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Clinical Documentation</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Encounter notes, discharge summaries, referral letters — generated from structured data and physician input. Reduces documentation time from hours to minutes. Outputs conform to your templates and compliance requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Administrative Automation</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Appointment scheduling, insurance verification, prior authorization workflows. These processes have clear rules and high volume — ideal for AI. The system handles the standard flow and escalates exceptions to staff.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== RETAIL & E-COMMERCE ===== -->
+  <section class="vertical-section">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
+        <div style="flex: 1.1;">
+          <div class="section-label reveal" style="margin-bottom: 24px;">Retail & E-commerce</div>
+          <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
+            Every customer interaction is an operation.
+          </h2>
+          <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
+            Retail at scale means thousands of simultaneous conversations — returns, tracking, product questions, complaints. Each one follows a pattern. AI handles the pattern. Your team handles the exceptions.
+          </p>
+        </div>
+        <div style="flex: 1; padding-top: 48px;">
+          <div class="anim-icon reveal reveal-delay-2" style="width: 100%; max-width: 320px; margin: 0 auto;">
+            <svg viewBox="0 0 200 160" fill="none">
+              <!-- Shopping/cart abstraction -->
+              <rect x="50" y="40" width="100" height="70" rx="4" stroke="var(--accent)" stroke-width="1" fill="none" opacity="0.15"/>
+              <!-- Grid of items -->
+              <rect x="60" y="50" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <rect x="90" y="50" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <rect x="120" y="50" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <rect x="60" y="78" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.3"/>
+              <rect x="90" y="78" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.3"/>
+              <!-- Selection highlight moving -->
+              <rect x="60" y="50" width="25" height="20" rx="2" stroke="var(--accent)" stroke-width="2" fill="none" opacity="0">
+                <animate attributeName="x" values="60;90;120;90;60" dur="5s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0;0.8;0.8;0.8;0" dur="5s" repeatCount="indefinite"/>
+              </rect>
+              <!-- Chat bubbles -->
+              <rect x="55" y="120" width="40" height="16" rx="8" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0">
+                <animate attributeName="opacity" values="0;0.5;0.5;0" dur="4s" repeatCount="indefinite"/>
+              </rect>
+              <rect x="105" y="120" width="35" height="16" rx="8" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0.5;0.5;0" dur="4s" repeatCount="indefinite"/>
+              </rect>
+              <!-- Typing dots -->
+              <circle cx="115" cy="128" r="1.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;0.6;0.2;0.6;0" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="121" cy="128" r="1.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;0.2;0.6;0.2;0" dur="4s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="127" cy="128" r="1.5" fill="var(--accent)" opacity="0">
+                <animate attributeName="opacity" values="0;0;0;0.6;0.2;0.6;0" dur="4s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Customer Support</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                An agent that knows your product catalog, your return policies, your shipping status in real time. Handles order tracking, returns, exchanges, and product questions across every channel — web chat, WhatsApp, email. Resolves the standard cases. Routes the complex ones.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Product Intelligence</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                AI that understands your catalog deeply — not just keywords, but attributes, compatibility, use cases. Powers recommendation engines, search, and conversational product discovery. Customers describe what they need, the system finds it.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Operations & Fulfillment</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Inventory alerts, reorder triggers, supplier communication, exception handling — automated workflows that keep the operation running without manual intervention. When something breaks the pattern, the system flags it and routes it to the right person.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== LOGISTICS & SUPPLY CHAIN ===== -->
+  <section class="vertical-section">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+
+      <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
+        <div style="flex: 1.1;">
+          <div class="section-label reveal" style="margin-bottom: 24px;">Logistics & Supply Chain</div>
+          <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
+            Move faster with the same infrastructure.
+          </h2>
+          <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
+            Logistics is coordination at scale — carriers, warehouses, drivers, customers, exceptions. Every delay costs money. AI doesn't eliminate complexity, but it processes it in real time instead of after the fact.
+          </p>
+        </div>
+        <div style="flex: 1; padding-top: 48px;">
+          <div class="anim-icon reveal reveal-delay-2" style="width: 100%; max-width: 320px; margin: 0 auto;">
+            <svg viewBox="0 0 200 160" fill="none">
+              <!-- Network of nodes (warehouses/hubs) -->
+              <circle cx="40" cy="50" r="8" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <circle cx="160" cy="50" r="8" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <circle cx="100" cy="130" r="8" stroke="var(--accent)" stroke-width="1" fill="var(--bg-card)" opacity="0.5"/>
+              <circle cx="100" cy="60" r="12" stroke="var(--accent)" stroke-width="1.5" fill="var(--bg-card)" opacity="0.7"/>
+              <!-- Connection lines -->
+              <line x1="48" y1="50" x2="88" y2="60" stroke="var(--accent)" stroke-width="0.8" opacity="0.2"/>
+              <line x1="112" y1="60" x2="152" y2="50" stroke="var(--accent)" stroke-width="0.8" opacity="0.2"/>
+              <line x1="100" y1="72" x2="100" y2="122" stroke="var(--accent)" stroke-width="0.8" opacity="0.2"/>
+              <line x1="46" y1="56" x2="94" y2="124" stroke="var(--accent)" stroke-width="0.5" opacity="0.1"/>
+              <line x1="154" y1="56" x2="106" y2="124" stroke="var(--accent)" stroke-width="0.5" opacity="0.1"/>
+              <!-- Packages moving along routes -->
+              <rect width="6" height="5" rx="1" fill="var(--accent)" opacity="0.8">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M48,50 L88,60"/>
+                <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" repeatCount="indefinite"/>
+              </rect>
+              <rect width="6" height="5" rx="1" fill="var(--accent)" opacity="0.8">
+                <animateMotion dur="2.5s" repeatCount="indefinite" begin="1s" path="M112,60 L152,50"/>
+                <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.5s" repeatCount="indefinite" begin="1s"/>
+              </rect>
+              <rect width="6" height="5" rx="1" fill="var(--accent)" opacity="0.8">
+                <animateMotion dur="3.5s" repeatCount="indefinite" begin="0.5s" path="M100,72 L100,122"/>
+                <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
+              </rect>
+              <!-- Central hub pulse -->
+              <circle cx="100" cy="60" r="12" stroke="var(--accent)" stroke-width="0.5" fill="none" opacity="0">
+                <animate attributeName="r" values="12;22;12" dur="3s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Demand Forecasting</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                AI that reads historical patterns, seasonal signals, market data, and real-time sales to predict demand before it materializes. Less overstock, fewer stockouts. Forecasts update continuously, not monthly.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Carrier Coordination</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Automated communication with carriers — booking, tracking updates, exception handling, SLA monitoring. When a shipment is delayed, the system detects it, notifies the right people, and triggers contingency workflows. No one checks a spreadsheet.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="app-block">
+          <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
+            <div style="flex: 0 0 200px;">
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Warehouse Operations</span>
+            </div>
+            <div style="flex: 1;">
+              <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
+                Pick-path optimization, inventory reconciliation, receiving automation. AI that processes warehouse data in real time to reduce handling time, minimize errors, and keep inventory counts accurate without manual cycle counts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===== CTA ===== -->
+  <section class="gradient-mesh dot-grid" style="border-top: 1px solid var(--border); position: relative; overflow: hidden;">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px; text-align: center;">
+      <div class="reveal" style="max-width: 600px; margin: 0 auto;">
+        <h2 class="font-display reveal reveal-delay-1" style="font-size: 40px; font-weight: 800; letter-spacing: -1.5px; color: var(--text-primary); line-height: 1.15; margin-bottom: 24px;">
+          Different industry.<br>Same discipline.
+        </h2>
+        <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 40px;">
+          We learn your operation, find where AI fits, build the system, and run it. The vertical changes. The approach doesn't.
+        </p>
+        <a href="index.html#contact" class="btn-primary reveal reveal-delay-3">Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer style="background: var(--bg-deep); border-top: 1px solid var(--border);">
+    <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 40px 64px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="index.html" class="font-display" style="font-size: 16px; font-weight: 700; color: var(--text-primary); text-decoration: none;">Radius</a>
+      <div style="display: flex; align-items: center; gap: 32px;">
+        <span class="font-mono" style="font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em;">Built with Arc</span>
+        <a href="mailto:hello@radius.ai" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">hello@radius.ai</a>
+        <span style="font-size: 13px; color: var(--text-muted);">&copy; 2026 Radius</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ===== PARTICLE FIELD =====
+    (function() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, scrollY = 0, particles = [];
+      let occlusionRects = [];
+
+      const LAYERS = [
+        { count: 35, size: [1, 2.2],   glow: 6,  opacity: [0.12, 0.25], parallax: 0.03, drift: 0.15 },
+        { count: 20, size: [1.8, 3.5], glow: 10, opacity: [0.18, 0.35], parallax: 0.15, drift: 0.25 },
+        { count: 10, size: [3, 5.5],   glow: 18, opacity: [0.22, 0.45], parallax: 0.40, drift: 0.35 }
+      ];
+
+      // Elements that particles should disappear behind
+      const OCCLUSION_SELECTORS = [
+        'h1', 'h2', 'h3', 'p', '.section-label', '.btn-primary',
+        '.anim-icon', '.use-case-tag', '.app-block',
+        'nav', 'footer', '.font-mono span'
+      ].join(',');
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function updateOcclusionRects() {
+        occlusionRects = [];
+        const els = document.querySelectorAll(OCCLUSION_SELECTORS);
+        for (let i = 0; i < els.length; i++) {
+          const r = els[i].getBoundingClientRect();
+          if (r.bottom < -50 || r.top > H + 50 || r.width === 0) continue;
+          occlusionRects.push({ l: r.left - 8, t: r.top - 8, r: r.right + 8, b: r.bottom + 8 });
+        }
+      }
+
+      setInterval(updateOcclusionRects, 200);
+
+      function isOccluded(px, py) {
+        for (let i = 0; i < occlusionRects.length; i++) {
+          const r = occlusionRects[i];
+          if (px >= r.l && px <= r.r && py >= r.t && py <= r.b) return true;
+        }
+        return false;
+      }
+
+      function createParticles() {
+        particles = [];
+        LAYERS.forEach((layer) => {
+          const spread = H * (2 + layer.parallax * 10);
+          for (let i = 0; i < layer.count; i++) {
+            particles.push({
+              baseX: rand(0, W),
+              baseY: rand(-spread * 0.3, spread),
+              size: rand(layer.size[0], layer.size[1]),
+              glow: layer.glow,
+              opacity: rand(layer.opacity[0], layer.opacity[1]),
+              parallax: layer.parallax,
+              phase: rand(0, Math.PI * 2),
+              phaseY: rand(0, Math.PI * 2),
+              driftSpeed: rand(0.12, 0.35),
+              driftSpeedY: rand(0.08, 0.28),
+              driftAmp: rand(30, 90) * layer.drift,
+              driftAmpY: rand(20, 60) * layer.drift,
+              yDrift: rand(-0.03, -0.008) * layer.drift,
+              occAlpha: 1
+            });
+          }
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const t = performance.now() * 0.001;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          const dx = Math.sin(t * p.driftSpeed + p.phase) * p.driftAmp;
+          const dy = Math.cos(t * p.driftSpeedY + p.phaseY) * p.driftAmpY;
+          p.baseY += p.yDrift;
+
+          const y = p.baseY - scrollY * p.parallax + dy;
+
+          const spread = H * (2 + p.parallax * 10);
+          if (p.baseY < -spread * 0.3 - 50) p.baseY = spread;
+          if (p.baseY > spread + 50) p.baseY = -spread * 0.3;
+
+          if (y < -30 || y > H + 30) continue;
+
+          const x = p.baseX + dx;
+          const drawX = ((x % W) + W) % W;
+
+          // Smooth occlusion fade
+          const hidden = isOccluded(drawX, y);
+          p.occAlpha += (hidden ? -0.08 : 0.06);
+          if (p.occAlpha < 0) p.occAlpha = 0;
+          if (p.occAlpha > 1) p.occAlpha = 1;
+          if (p.occAlpha < 0.01) continue;
+
+          const pulse = 0.7 + 0.3 * Math.sin(t * 1.2 + p.phase);
+          const alpha = p.opacity * pulse * p.occAlpha;
+
+          const grad = ctx.createRadialGradient(drawX, y, 0, drawX, y, p.size + p.glow);
+          grad.addColorStop(0, `rgba(230, 57, 38, ${alpha})`);
+          grad.addColorStop(0.3, `rgba(230, 57, 38, ${alpha * 0.4})`);
+          grad.addColorStop(1, `rgba(230, 57, 38, 0)`);
+          ctx.beginPath();
+          ctx.arc(drawX, y, p.size + p.glow, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(drawX, y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(230, 57, 38, ${alpha})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); createParticles(); });
+      window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+
+      resize();
+      createParticles();
+      updateOcclusionRects();
+      draw();
+    })();
+  </script>
+
+</body>
+</html>

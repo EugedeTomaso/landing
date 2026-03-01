@@ -1,4 +1,4 @@
-# Landing Page Design — Radius + Arc
+# Landing Page Design — Radius + Arc (v2)
 
 ## Overview
 
@@ -8,165 +8,111 @@ Landing page for **Radius**, an AI transformation firm that combines consulting,
 
 ## Brand & Positioning
 
-- **Radius** = the consulting firm. Strategy + execution + ongoing operation.
+- **Radius** = the firm. Understanding + building + operating AI systems.
 - **Arc** = the proprietary AI orchestration platform. Built by Radius, runs the systems they deploy.
 - **Relationship**: "We built the platform." Radius created Arc. Not a reseller, not a partner.
 - **Vibe**: Modern & tech-native (Vercel, Stripe, Linear). Not corporate, not startup-cute.
 - **Primary emotion**: "These people get it." Credibility through depth, not buzzwords.
-- **Tone**: Direct, confident, zero buzzwords. Someone who's done this 50 times and doesn't need to impress you.
-- **Revenue model**: Triple stream — consulting fees (Discover), implementation fees (Build), SaaS + managed services (Run).
+- **Tone**: Like an engineer explaining facts. Direct, almost dry, zero buzzwords. Let the work speak. NOT a startup pitch, NOT salesy.
+- **Revenue model**: Triple stream — consulting fees (understanding), implementation fees (building), SaaS + managed services (running).
 - **Target**: Any company wanting AI transformation. Industry-agnostic.
 
-## Tagline Candidates
-
-1. "Find it. Build it. Run it."
-2. "AI that actually works for your business."
-3. "From diagnosis to production."
-
-## Page Structure
+## Page Structure (7 sections)
 
 ### 1. Hero
 
-Tagline + sub-copy + single CTA.
+**Headline:**
+> AI makes your business operate faster, smarter, and at a scale you can't do with people alone.
 
-Core narrative:
+**Sub-copy:**
+> We look at your operations, find where AI makes a real difference, build the system, and run it. Same team, one platform, no handoffs.
 
-> Most companies know they should be using AI. Few know where or how. Radius exists to close that gap. We understand your operation, find the real opportunities, build the systems on Arc — our AI orchestration platform — and run them in production. Not a prototype. Not a slide deck. A working system.
+**CTA:** "Talk to us" → scrolls to contact form.
 
-CTA: "Tell us what you're trying to solve" → scrolls to contact form.
+### 2. What Changes — Real AI impact on operations
 
-### 2. Three Phases — Discover, Build, Run
+Four concrete transformations. No process methodology. Focus on what happens when AI works.
 
-The core service offering, presented as a clear pipeline.
+**1. Processes that run themselves.**
+> What's manual today becomes automated. Faster, cheaper, no errors.
 
-**Phase 1: Discover**
+**2. Teams that focus on what matters.**
+> AI handles the repetitive work. Your people do the rest.
 
-Consulting engagement (2-6 weeks). Deep audit of client operations to find where AI generates real impact.
+**3. Decisions in real time.**
+> Data analyzed as it happens, not at the end of the month.
 
-Includes:
-- Operational process mapping (friction, repetition, bottlenecks)
-- AI automation opportunity identification
-- Existing data evaluation (availability, quality, gaps)
-- Impact vs effort prioritization
-- Deliverable: AI Transformation Roadmap with quick wins and long-term projects
+**4. Growth without the bottleneck.**
+> More output from the same operation.
 
-Landing copy:
-> "We start by understanding your business better than any AI vendor ever will. We map your operations, find the friction, and identify exactly where intelligent automation changes the game. You get a prioritized roadmap — not a slide deck full of buzzwords."
+### 3. How It Works — The consulting gap + Arc
 
-Revenue: Fixed consulting fee.
+Starts by explaining that AI implementation requires understanding the business first. Then introduces Arc as the platform where it all runs.
 
-**Phase 2: Build**
+**Intro copy:**
+> AI is a powerful technology. But technology alone doesn't transform a business. Between what AI can do and what your company needs, there's a gap — understanding your operation, your data, your bottlenecks, your people. We close that gap before writing a single line of code.
 
-Implementation on Arc. Take prioritized opportunities from the roadmap and build them.
+**Arc transition:**
+> Then we build it on Arc — a single platform where agents, knowledge, automations, and integrations come together. No glue code. No fragile integrations. One system, fully managed.
 
-Includes:
-- Agent architecture design (routing, specialization, knowledge bases, workflows)
-- Integration with existing systems (CRM, ERP, ticketing, Slack, WhatsApp)
-- RAG configuration with client documents and data
-- Workflow automation setup
-- Testing and evaluation (evals system)
-- Production deployment
+**Pillars (engineer-tone descriptions):**
 
-Landing copy:
-> "We don't hand you a PDF and wish you luck. We build the system. Our team configures, integrates, and deploys intelligent agents on Arc — our proprietary AI orchestration platform. Multi-agent routing, knowledge bases, workflow automation, connected to your existing tools. Production-ready, not a prototype."
-
-Revenue: Project-based implementation fee.
-
-**Phase 3: Run**
-
-Ongoing operation. Systems run on Arc (SaaS), Radius provides monitoring, optimization, and evolution.
-
-Includes:
-- Arc platform running (SaaS subscription)
-- Performance monitoring (automated evals, quality checks)
-- Continuous optimization of prompts, routing, RAG
-- Expansion: new agents, workflows, channels
-- Technical support
-
-Landing copy:
-> "Your AI systems don't sit on a shelf. They run on Arc, our platform, with continuous monitoring and optimization. We measure quality, tune performance, and expand capabilities as your needs evolve. This isn't a project — it's an operating system for your AI."
-
-Revenue: Monthly SaaS + optional managed services retainer.
-
-### 3. Arc Platform Section
-
-Arc appears as its own product — the reason Radius can do what it does.
-
-Headline:
-> "Built on Arc — the AI orchestration platform we built from the ground up."
-
-Sub-copy:
-> "Arc is the engine behind every system we deploy. A platform where intelligent agents, knowledge bases, workflows, and integrations come together into one operational system. No glue code. No fragile integrations. One platform, fully managed."
-
-Capabilities shown as pillars (not feature lists):
-
-| Pillar | Client-facing message | What it is underneath |
-|--------|----------------------|----------------------|
-| Intelligent Agents | "AI that understands who's asking and what they need" | Multi-agent routing, classification, specialized agents |
-| Knowledge & Memory | "Your data, searchable and always up to date" | RAG, vector search, per-user isolation, document ingestion |
-| Workflow Automation | "Complex processes that run themselves" | Multi-step workflows, conditional logic, API integrations |
-| Multi-Channel | "Meet your customers where they are" | Slack, WhatsApp, Instagram, API, web |
-| Measurement | "Know if your AI is actually working" | Evals, LLM-as-Judge, A/B testing, quality monitoring |
+| Pillar | Description |
+|--------|-------------|
+| Agents | AI that routes, classifies, and responds based on context. |
+| Knowledge | Your data, indexed and searchable in real time. |
+| Automation | Multi-step workflows that execute without intervention. |
+| Channels | Slack, WhatsApp, web, API. One system, every channel. |
+| Measurement | Every interaction tracked. If it's not working, we know. |
 
 Rules:
 - No code, no SDK, no API docs
 - No internal jargon (routers, routes, MCP servers)
-- Sell the result, not the architecture
+- Describe what it does, not how it's built
 
-CTA: "See Arc in action" → demo request or video walkthrough.
+### 4. Why It Works — Facts, not claims
 
-### 4. Why Radius — Credibility Section
+Three factual statements. Should read like a technical spec, not an ad.
 
-Proof by depth, not by logos.
+**1. We own the technology.**
+> Arc is built by us, from the ground up. That means no vendor limitations, no rigid templates. Every system is shaped to fit your operation exactly.
 
-**Anti-hype statement:**
-> "Most AI consultancies sell you a vision and leave you with a slide deck. We sell you a system and leave you with something running in production. We're not here to evangelise AI — we're here to make it work."
+**2. One team, end to end.**
+> The people who understand your operation are the same people who build and run the system. No handoffs, no lost context.
 
-**Three differentiators:**
+**3. Everything is measured.**
+> Every agent, every response, every workflow has metrics. We don't guess if it's working. We know. And when it's not, we fix it before you notice.
 
-1. "We built the platform."
-> "We don't stitch together third-party tools and call it a solution. Arc is ours — built from the ground up to orchestrate AI agents, knowledge, and automation. When something breaks, we fix it. When you need something new, we build it."
+### 5. Who We Are — Founders
 
-2. "Strategy without execution is a slide deck."
-> "Every AI transformation starts with understanding the business. But understanding is not the finish line. We go from diagnosis to production — same team, same platform, no handoffs."
+Abstract, no names, specific in substance.
 
-3. "We measure everything."
-> "Every agent, every response, every workflow has quality metrics. We don't guess if your AI is working — we know. And when it's not, we fix it before you notice."
+> Two engineers. Fifteen years building and shipping software. We've scaled teams, built platforms, and delivered systems across the Americas for companies of every size.
+>
+> We got into AI because we're good at making complex things work. That's it.
 
-**Metrics placeholder (v2, when data exists):**
-- "X processes automated"
-- "X% average reduction in response time"
-- "X companies transformed"
+### 6. Get In Touch — Contact
 
-Do not invent numbers. This section appears when there's real data.
+Direct. No "free, no-commitment conversation." An engineer says "let's talk."
 
-### 5. CTA Section
+**Headline:**
+> If you have an operational problem you think AI can solve, let's talk.
 
-Single clear action. No newsletter, no multiple options.
-
-Headline:
-> "Tell us what you're trying to solve."
-
-Sub-copy:
-> "A free, no-commitment conversation to explore where AI can make a real difference in your business."
-
-Form fields:
+**Form fields:**
 - Name
 - Company
 - Email
-- Open field: "What's the biggest operational challenge you'd like to solve with AI?"
+- "What are you trying to solve?" (textarea, larger)
 
-The open field is intentional — works as a lead quality filter.
+**Button:** Talk to us
 
-Fallback below form:
-> "Prefer email? Reach us at hello@radius.ai"
+**Fallback:** hello@radius.ai
 
-### 6. Footer
+### 7. Footer
 
-Minimal. Tech-native companies don't have massive footers.
+Minimal.
 
-- Radius logo
-- "Built with Arc" (link to Arc section or future dedicated landing)
-- Contact email
-- LinkedIn (if exists)
-- Copyright
+- Radius wordmark
+- "Built with Arc"
+- hello@radius.ai
+- © 2026 Radius
