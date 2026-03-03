@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impactia — AI by Industry</title>
-  <meta name="description" content="How AI transforms operations across fintech, healthcare, retail, and logistics. Real applications, not theory.">
+  <title>Impactia — IA por Industria</title>
+  <meta name="description" content="Cómo la IA transforma operaciones en fintech, salud, retail y logística. Aplicaciones reales, no teoría.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <script>
-    if (!localStorage.getItem('lang_chosen')) {
-      var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      if (lang.startsWith('es')) {
-        localStorage.setItem('lang_chosen', 'es');
-        window.location.replace('verticals-es.html');
-      } else {
-        localStorage.setItem('lang_chosen', 'en');
-      }
-    }
-  </script>
   <style>
     :root {
       --bg-deep: #050508;
@@ -247,21 +236,21 @@
   <!-- NAV -->
   <nav>
     <div style="max-width: 1280px; margin: 0 auto; padding: 16px 64px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="text-decoration: none;">
+      <a href="es.html" style="text-decoration: none;">
             <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
               <text x="0" y="21" font-family="'Bricolage Grotesque', serif" font-size="20" font-weight="800" fill="var(--text-primary)" letter-spacing="-0.5">Impactia</text>
               <rect x="97" y="4" width="6" height="6" rx="1" fill="var(--accent)" opacity="0.9"/>
             </svg>
           </a>
       <div style="display: flex; align-items: center; gap: 32px;">
-        <span class="font-mono" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Industries</span>
-        <a href="index.html#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
+        <span class="font-mono" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Industrias</span>
+        <a href="es.html#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
            onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
-          Talk to us &rarr;
+          Hablemos &rarr;
         </a>
-        <a href="verticals-es.html" onclick="localStorage.setItem('lang_chosen','es')" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; transition: color 0.3s, border-color 0.3s;"
+        <a href="verticals.html" onclick="localStorage.setItem('lang_chosen','en')" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; transition: color 0.3s, border-color 0.3s;"
            onmouseover="this.style.color='var(--text-primary)';this.style.borderColor='var(--border-hover)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">
-          ES
+          EN
         </a>
       </div>
     </div>
@@ -273,11 +262,11 @@
       <div style="max-width: 780px;">
         <div class="gradient-line reveal" style="margin-bottom: 48px;"></div>
         <h1 class="font-display hero-heading reveal reveal-delay-1" style="font-size: 56px; font-weight: 800; line-height: 1.1; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 32px;">
-          AI doesn't work the same way in every industry.<br>
-          <span style="color: var(--text-secondary);">That's the point.</span>
+          La IA no funciona igual en todas las industrias.<br>
+          <span style="color: var(--text-secondary);">Ese es el punto.</span>
         </h1>
         <p class="reveal reveal-delay-2" style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 560px;">
-          Every industry has different operations, different data, different bottlenecks. We learn the specifics of yours before building anything. Here's what that looks like in practice.
+          Cada industria tiene operaciones distintas, datos distintos, cuellos de botella distintos. Aprendemos los detalles de la tuya antes de construir nada. Así se ve en la práctica.
         </p>
       </div>
     </div>
@@ -290,12 +279,12 @@
 
       <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
         <div style="flex: 1.1;">
-          <div class="section-label reveal" style="margin-bottom: 24px;">Fintech & Banking</div>
+          <div class="section-label reveal" style="margin-bottom: 24px;">Fintech y Banca</div>
           <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
-            Compliance is slow.<br>AI makes it instant.
+            El compliance es lento.<br>La IA lo hace instantáneo.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Financial services are drowning in manual review — KYC, transaction monitoring, document verification. These are pattern-recognition tasks at scale. That's exactly what AI is built for.
+            Los servicios financieros se ahogan en revisión manual — KYC, monitoreo de transacciones, verificación de documentos. Son tareas de reconocimiento de patrones a escala. Exactamente para lo que la IA está hecha.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -341,11 +330,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">KYC & Onboarding</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">KYC y Onboarding</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Document extraction, identity verification, risk scoring — automated end to end. What takes a compliance team hours happens in seconds. The agent reads the document, cross-references against watchlists, flags anomalies, and produces a decision-ready report.
+                Extracción de documentos, verificación de identidad, scoring de riesgo — automatizado de punta a punta. Lo que le toma horas a un equipo de compliance sucede en segundos. El agente lee el documento, lo cruza contra listas de vigilancia, marca anomalías y produce un reporte listo para decisión.
               </p>
             </div>
           </div>
@@ -353,11 +342,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Transaction Monitoring</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Monitoreo de Transacciones</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Real-time pattern analysis across transaction streams. Instead of batch reports at end of day, AI flags suspicious activity as it happens — velocity anomalies, geographic inconsistencies, behavioral deviations. Fewer false positives, faster response.
+                Análisis de patrones en tiempo real en flujos de transacciones. En vez de reportes batch al final del día, la IA marca actividad sospechosa en el momento — anomalías de velocidad, inconsistencias geográficas, desviaciones de comportamiento. Menos falsos positivos, respuesta más rápida.
               </p>
             </div>
           </div>
@@ -365,11 +354,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Customer Operations</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Operaciones de Clientes</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Account inquiries, dispute resolution, product questions — an AI agent that knows your products, your policies, and your customer's history. Handles the repetitive volume. Escalates what actually needs a human.
+                Consultas de cuenta, resolución de disputas, preguntas de productos — un agente de IA que conoce tus productos, tus políticas y el historial de tu cliente. Maneja el volumen repetitivo. Escala lo que realmente necesita un humano.
               </p>
             </div>
           </div>
@@ -386,12 +375,12 @@
 
       <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
         <div style="flex: 1.1;">
-          <div class="section-label reveal" style="margin-bottom: 24px;">Healthcare</div>
+          <div class="section-label reveal" style="margin-bottom: 24px;">Salud</div>
           <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
-            Clinicians shouldn't spend their time on paperwork.
+            Los médicos no deberían gastar su tiempo en papeleo.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Healthcare operations are heavy on documentation, triage, and coordination. Most of that work follows predictable patterns — the kind AI handles well. We put clinicians back on clinical work.
+            Las operaciones de salud son pesadas en documentación, triage y coordinación. La mayoría de ese trabajo sigue patrones predecibles — el tipo que la IA maneja bien. Ponemos a los médicos de vuelta en el trabajo clínico.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -422,11 +411,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Patient Triage</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Triage de Pacientes</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                AI that reads symptoms, medical history, and urgency signals to route patients correctly. Not a replacement for clinical judgment — a filter that ensures the right cases get to the right people faster. Works across chat, phone intake, and web forms.
+                IA que lee síntomas, historial médico y señales de urgencia para rutear pacientes correctamente. No reemplaza el criterio clínico — es un filtro que asegura que los casos correctos lleguen a las personas correctas más rápido. Funciona en chat, intake telefónico y formularios web.
               </p>
             </div>
           </div>
@@ -434,11 +423,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Clinical Documentation</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Documentación Clínica</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Encounter notes, discharge summaries, referral letters — generated from structured data and physician input. Reduces documentation time from hours to minutes. Outputs conform to your templates and compliance requirements.
+                Notas de consulta, resúmenes de alta, cartas de derivación — generados a partir de datos estructurados e input del médico. Reduce el tiempo de documentación de horas a minutos. Los outputs cumplen con tus templates y requisitos de compliance.
               </p>
             </div>
           </div>
@@ -446,11 +435,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Administrative Automation</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Automatización Administrativa</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Appointment scheduling, insurance verification, prior authorization workflows. These processes have clear rules and high volume — ideal for AI. The system handles the standard flow and escalates exceptions to staff.
+                Agendamiento de turnos, verificación de seguros, workflows de autorización previa. Estos procesos tienen reglas claras y alto volumen — ideales para IA. El sistema maneja el flujo estándar y escala las excepciones al staff.
               </p>
             </div>
           </div>
@@ -467,12 +456,12 @@
 
       <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
         <div style="flex: 1.1;">
-          <div class="section-label reveal" style="margin-bottom: 24px;">Retail & E-commerce</div>
+          <div class="section-label reveal" style="margin-bottom: 24px;">Retail y E-commerce</div>
           <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
-            Every customer interaction is an operation.
+            Cada interacción con el cliente es una operación.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Retail at scale means thousands of simultaneous conversations — returns, tracking, product questions, complaints. Each one follows a pattern. AI handles the pattern. Your team handles the exceptions.
+            Retail a escala significa miles de conversaciones simultáneas — devoluciones, tracking, preguntas de productos, quejas. Cada una sigue un patrón. La IA maneja el patrón. Tu equipo maneja las excepciones.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -517,11 +506,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Customer Support</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Atención al Cliente</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                An agent that knows your product catalog, your return policies, your shipping status in real time. Handles order tracking, returns, exchanges, and product questions across every channel — web chat, WhatsApp, email. Resolves the standard cases. Routes the complex ones.
+                Un agente que conoce tu catálogo de productos, tus políticas de devolución, tu estado de envío en tiempo real. Maneja tracking de pedidos, devoluciones, cambios y preguntas de productos en cada canal — web chat, WhatsApp, email. Resuelve los casos estándar. Rutea los complejos.
               </p>
             </div>
           </div>
@@ -529,11 +518,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Product Intelligence</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Inteligencia de Producto</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                AI that understands your catalog deeply — not just keywords, but attributes, compatibility, use cases. Powers recommendation engines, search, and conversational product discovery. Customers describe what they need, the system finds it.
+                IA que entiende tu catálogo profundamente — no solo keywords, sino atributos, compatibilidad, casos de uso. Potencia motores de recomendación, búsqueda y descubrimiento conversacional de productos. Los clientes describen lo que necesitan, el sistema lo encuentra.
               </p>
             </div>
           </div>
@@ -541,11 +530,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Operations & Fulfillment</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Operaciones y Fulfillment</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Inventory alerts, reorder triggers, supplier communication, exception handling — automated workflows that keep the operation running without manual intervention. When something breaks the pattern, the system flags it and routes it to the right person.
+                Alertas de inventario, triggers de reorden, comunicación con proveedores, manejo de excepciones — workflows automatizados que mantienen la operación corriendo sin intervención manual. Cuando algo rompe el patrón, el sistema lo marca y lo rutea a la persona correcta.
               </p>
             </div>
           </div>
@@ -562,12 +551,12 @@
 
       <div class="two-col" style="display: flex; gap: 80px; margin-bottom: 64px;">
         <div style="flex: 1.1;">
-          <div class="section-label reveal" style="margin-bottom: 24px;">Logistics & Supply Chain</div>
+          <div class="section-label reveal" style="margin-bottom: 24px;">Logística y Cadena de Suministro</div>
           <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
-            Move faster with the same infrastructure.
+            Mové más rápido con la misma infraestructura.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Logistics is coordination at scale — carriers, warehouses, drivers, customers, exceptions. Every delay costs money. AI doesn't eliminate complexity, but it processes it in real time instead of after the fact.
+            Logística es coordinación a escala — carriers, depósitos, conductores, clientes, excepciones. Cada demora cuesta plata. La IA no elimina la complejidad, pero la procesa en tiempo real en vez de después del hecho.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -611,11 +600,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Demand Forecasting</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Pronóstico de Demanda</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                AI that reads historical patterns, seasonal signals, market data, and real-time sales to predict demand before it materializes. Less overstock, fewer stockouts. Forecasts update continuously, not monthly.
+                IA que lee patrones históricos, señales estacionales, datos de mercado y ventas en tiempo real para predecir demanda antes de que se materialice. Menos sobrestock, menos roturas. Los pronósticos se actualizan continuamente, no mensualmente.
               </p>
             </div>
           </div>
@@ -623,11 +612,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Carrier Coordination</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Coordinación de Carriers</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Automated communication with carriers — booking, tracking updates, exception handling, SLA monitoring. When a shipment is delayed, the system detects it, notifies the right people, and triggers contingency workflows. No one checks a spreadsheet.
+                Comunicación automatizada con carriers — booking, actualizaciones de tracking, manejo de excepciones, monitoreo de SLAs. Cuando un envío se demora, el sistema lo detecta, notifica a las personas correctas y dispara workflows de contingencia. Nadie revisa una planilla.
               </p>
             </div>
           </div>
@@ -635,11 +624,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Warehouse Operations</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Operaciones de Depósito</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Pick-path optimization, inventory reconciliation, receiving automation. AI that processes warehouse data in real time to reduce handling time, minimize errors, and keep inventory counts accurate without manual cycle counts.
+                Optimización de rutas de picking, reconciliación de inventario, automatización de recepción. IA que procesa datos del depósito en tiempo real para reducir tiempos de manipulación, minimizar errores y mantener los conteos de inventario precisos sin conteos cíclicos manuales.
               </p>
             </div>
           </div>
@@ -655,12 +644,12 @@
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px; text-align: center;">
       <div class="reveal" style="max-width: 600px; margin: 0 auto;">
         <h2 class="font-display reveal reveal-delay-1" style="font-size: 40px; font-weight: 800; letter-spacing: -1.5px; color: var(--text-primary); line-height: 1.15; margin-bottom: 24px;">
-          Different industry.<br>Same discipline.
+          Distinta industria.<br>Misma disciplina.
         </h2>
         <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 40px;">
-          We learn your operation, find where AI fits, build the system, and run it. The vertical changes. The approach doesn't.
+          Aprendemos tu operación, encontramos dónde encaja la IA, construimos el sistema y lo operamos. La vertical cambia. El approach no.
         </p>
-        <a href="index.html#contact" class="btn-primary reveal reveal-delay-3">Talk to us</a>
+        <a href="es.html#contact" class="btn-primary reveal reveal-delay-3">Hablemos</a>
       </div>
     </div>
   </section>
@@ -669,7 +658,7 @@
   <!-- FOOTER -->
   <footer style="background: var(--bg-deep); border-top: 1px solid var(--border);">
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 40px 64px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="text-decoration: none;">
+      <a href="es.html" style="text-decoration: none;">
           <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
             <text x="0" y="21" font-family="'Bricolage Grotesque', serif" font-size="20" font-weight="800" fill="var(--text-primary)" letter-spacing="-0.5">Impactia</text>
             <rect x="97" y="4" width="6" height="6" rx="1" fill="var(--accent)" opacity="0.9"/>
