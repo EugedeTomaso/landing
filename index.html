@@ -269,7 +269,7 @@
     .wc-icon svg { width: 40px; height: 40px; }
 
     /* ===== FORM ===== */
-    input, textarea {
+    input, textarea, select {
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -289,6 +289,15 @@
       color: var(--text-muted);
     }
     textarea { resize: none; }
+    select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%),
+                        linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(50% - 2px), calc(100% - 12px) calc(50% - 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 36px;
+    }
     label {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -298,6 +307,43 @@
       text-transform: uppercase;
       margin-bottom: 6px;
       display: block;
+    }
+
+    .insight-cta {
+      background: linear-gradient(120deg, rgba(230, 57, 38, 0.16), rgba(26, 26, 34, 0.9));
+      border: 1px solid var(--border-hover);
+      border-radius: 16px;
+      padding: 36px;
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .resource-cover {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .resource-meta {
+      padding: 14px 16px 16px;
+    }
+    .resource-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
 
     /* ===== PILLAR CARD ICON ===== */
@@ -347,6 +393,7 @@
       .founders-text { font-size: 24px !important; }
       .workflow-layout { flex-direction: column !important; }
       .workflow-text { flex: none !important; }
+      .resource-grid { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -366,6 +413,10 @@
         <a href="verticals.html" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
            onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
           Industries
+        </a>
+        <a href="#insights" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
+           onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+          Insights
         </a>
         <a href="#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
            onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
@@ -517,6 +568,100 @@
           <p style="font-size: 15px; line-height: 1.6; color: var(--text-secondary);">Without ownership, metrics, and operating routines, AI adoption stalls after the first wins.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IN-CONTENT CTA ===== -->
+  <section style="background: var(--bg-deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 56px 64px;">
+      <div class="insight-cta reveal">
+        <span class="font-mono" style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 14px;">In-content resource</span>
+        <h3 class="font-display" style="font-size: 34px; line-height: 1.2; letter-spacing: -1.2px; margin-bottom: 12px; max-width: 760px;">
+          Facing friction in AI adoption?
+        </h3>
+        <p style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; max-width: 760px;">
+          Download our detailed whitepaper on moving from AI hype to operational advantage in non-tech companies.
+        </p>
+        <a href="#insights" class="btn-primary">Get the whitepaper</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INSIGHTS / WHITEPAPER ===== -->
+  <section id="insights" class="dot-grid" style="background: var(--bg-surface); border-bottom: 1px solid var(--border);">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
+      <div class="section-label reveal" style="margin-bottom: 24px;">Insights</div>
+      <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.15; margin-bottom: 16px; max-width: 760px;">
+        Download the Whitepaper
+      </h2>
+      <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 760px; margin-bottom: 64px;">
+        Choose language and leave your contact details to get instant access.
+      </p>
+
+      <div class="two-col" style="display: flex; gap: 48px; align-items: flex-start;">
+        <div style="flex: 1;" class="reveal reveal-delay-1">
+          <div class="resource-grid">
+            <article class="resource-card">
+              <img src="assets/whitepapers/impactia-whitepaper-en-cover.png" alt="Impactia whitepaper English cover" class="resource-cover">
+              <div class="resource-meta">
+                <span class="resource-badge">English</span>
+                <h4 class="font-display" style="font-size: 20px; letter-spacing: -0.5px; margin-bottom: 6px;">From AI Hype to Operational Advantage</h4>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Tactical framework for adoption, governance, and measurable ROI.</p>
+              </div>
+            </article>
+            <article class="resource-card">
+              <img src="assets/whitepapers/impactia-whitepaper-es-cover.png" alt="Impactia whitepaper Spanish cover" class="resource-cover">
+              <div class="resource-meta">
+                <span class="resource-badge">Español</span>
+                <h4 class="font-display" style="font-size: 20px; letter-spacing: -0.5px; margin-bottom: 6px;">De la euforia de IA a la ventaja operativa</h4>
+                <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Marco práctico para priorizar casos, ejecutar MVPs y escalar impacto.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div style="flex: 1;" class="reveal reveal-delay-2">
+          <form id="whitepaper-form" action="https://formsubmit.co/hello@getimpactia.com" method="POST" style="display: flex; flex-direction: column; gap: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px;">
+            <input type="hidden" name="_subject" value="New whitepaper lead from Impactia website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="source" value="website-whitepaper">
+            <div>
+              <label>Name</label>
+              <input type="text" name="name" placeholder="Your full name" required>
+            </div>
+            <div>
+              <label>Company</label>
+              <input type="text" name="company" placeholder="Your company" required>
+            </div>
+            <div>
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@company.com" required>
+            </div>
+            <div>
+              <label>Role</label>
+              <input type="text" name="role" placeholder="CEO, COO, Ops Lead...">
+            </div>
+            <div>
+              <label>Whitepaper Language</label>
+              <select name="whitepaper_language" required>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; height: 52px;">Get whitepaper</button>
+          </form>
+
+          <div id="whitepaper-success" style="display: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 40px 28px; text-align: center;">
+            <div style="width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 50%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 class="font-display" style="font-size: 28px; letter-spacing: -1px; margin-bottom: 10px;">Download started.</h3>
+            <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6;">Check your downloads. We also received your request.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1265,6 +1410,45 @@
       });
     });
 
+    // Whitepaper gated download
+    document.getElementById('whitepaper-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      const btn = form.querySelector('button[type="submit"]');
+      const language = form.querySelector('select[name="whitepaper_language"]').value;
+      const files = {
+        en: { href: 'assets/whitepapers/impactia-whitepaper-en.pdf', name: 'Impactia_Whitepaper_EN.pdf' },
+        es: { href: 'assets/whitepapers/impactia-whitepaper-es.pdf', name: 'Impactia_Whitepaper_ES.pdf' }
+      };
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok || res.status === 200) {
+          const asset = files[language] || files.en;
+          const link = document.createElement('a');
+          link.href = asset.href;
+          link.download = asset.name;
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+          form.style.display = 'none';
+          document.getElementById('whitepaper-success').style.display = 'block';
+        } else {
+          btn.textContent = 'Get whitepaper';
+          btn.disabled = false;
+          alert('Something went wrong. Try emailing us at hello@getimpactia.com');
+        }
+      }).catch(function() {
+        btn.textContent = 'Get whitepaper';
+        btn.disabled = false;
+        alert('Something went wrong. Try emailing us at hello@getimpactia.com');
+      });
+    });
+
     // Timeline fill activation
     const timelineObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1293,6 +1477,7 @@
         'form', '.workflow-svg-wrap', 'nav', 'footer',
         '.founders-frame', '.step-card', '.pillar-card',
         '.wc-card', '.timeline-step', '.editorial-item'
+        , '#insights', '.insight-cta', '.resource-card'
       ].join(',');
 
       function rand(min, max) { return Math.random() * (max - min) + min; }
