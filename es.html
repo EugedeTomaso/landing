@@ -256,6 +256,57 @@
     }
     .wc-icon svg { width: 40px; height: 40px; }
 
+    /* ===== PROVIDER MARQUEE ===== */
+    .provider-marquee-section {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .provider-marquee-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .provider-marquee {
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    }
+    .provider-track {
+      width: max-content;
+      display: flex;
+      align-items: center;
+      animation: providerMarquee 30s linear infinite;
+      will-change: transform;
+    }
+    .provider-set {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      padding-right: 56px;
+    }
+    .provider-logo {
+      height: 26px;
+      width: auto;
+      opacity: 0.68;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      filter: drop-shadow(0 0 16px rgba(230, 57, 38, 0.08));
+    }
+    .provider-logo:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+    .provider-marquee:hover .provider-track {
+      animation-play-state: paused;
+    }
+    @keyframes providerMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     /* ===== FORM ===== */
     input, textarea, select {
       background: var(--bg-elevated);
@@ -382,6 +433,8 @@
       .workflow-layout { flex-direction: column !important; }
       .workflow-text { flex: none !important; }
       .resource-grid { grid-template-columns: 1fr !important; }
+      .provider-set { gap: 36px; padding-right: 36px; }
+      .provider-logo { height: 22px; }
     }
   </style>
 </head>
@@ -438,6 +491,37 @@
     <!-- Decorative corner element -->
     <div style="position: absolute; bottom: 64px; right: 64px; font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; writing-mode: vertical-rl;">
       Desliz&aacute; para explorar
+    </div>
+  </section>
+
+  <!-- ===== PROVIDER MARQUEE ===== -->
+  <section class="provider-marquee-section">
+    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 28px 64px;">
+      <p class="provider-marquee-label">Tecnolog&iacute;as LLM con las que trabajamos</p>
+      <div class="provider-marquee" aria-label="Proveedores LLM con los que trabajamos">
+        <div class="provider-track">
+          <div class="provider-set">
+            <img src="assets/providers/openai.svg" alt="OpenAI" class="provider-logo">
+            <img src="assets/providers/anthropic.svg" alt="Anthropic" class="provider-logo">
+            <img src="assets/providers/googlegemini.svg" alt="Google Gemini" class="provider-logo">
+            <img src="assets/providers/meta.svg" alt="Meta" class="provider-logo">
+            <img src="assets/providers/mistralai.svg" alt="Mistral AI" class="provider-logo">
+            <img src="assets/providers/openrouter.svg" alt="OpenRouter" class="provider-logo">
+            <img src="assets/providers/replicate.svg" alt="Replicate" class="provider-logo">
+            <img src="assets/providers/ollama.svg" alt="Ollama" class="provider-logo">
+          </div>
+          <div class="provider-set" aria-hidden="true">
+            <img src="assets/providers/openai.svg" alt="" class="provider-logo">
+            <img src="assets/providers/anthropic.svg" alt="" class="provider-logo">
+            <img src="assets/providers/googlegemini.svg" alt="" class="provider-logo">
+            <img src="assets/providers/meta.svg" alt="" class="provider-logo">
+            <img src="assets/providers/mistralai.svg" alt="" class="provider-logo">
+            <img src="assets/providers/openrouter.svg" alt="" class="provider-logo">
+            <img src="assets/providers/replicate.svg" alt="" class="provider-logo">
+            <img src="assets/providers/ollama.svg" alt="" class="provider-logo">
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
