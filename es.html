@@ -559,93 +559,6 @@
       color: var(--accent);
       margin-bottom: 8px;
     }
-    .whitepaper-preview {
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background:
-        radial-gradient(160% 120% at 100% 0%, rgba(255, 77, 48, 0.14), rgba(255, 77, 48, 0)),
-        linear-gradient(160deg, rgba(17, 20, 34, 0.94) 0%, rgba(10, 11, 18, 0.98) 100%);
-    }
-    .whitepaper-preview-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .whitepaper-preview-kicker {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .whitepaper-preview-date {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .whitepaper-preview-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .whitepaper-preview-list li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--text-secondary);
-    }
-    .whitepaper-preview-list span {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      margin-top: 3px;
-      flex-shrink: 0;
-    }
-    .whitepaper-preview-footer {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    .whitepaper-form-note {
-      margin-top: -10px;
-      font-size: 12px;
-      line-height: 1.6;
-      color: var(--text-muted);
-    }
-    .whitepaper-form-note a {
-      color: var(--text-secondary);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-    .whitepaper-form-note a:hover {
-      color: var(--text-primary);
-    }
-    .whitepaper-manual-link {
-      color: var(--text-secondary);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color 0.2s ease;
-    }
-    .whitepaper-manual-link:hover {
-      color: var(--text-primary);
-    }
-
     /* ===== PILLAR CARD ICON ===== */
     .pillar-icon {
       width: 40px;
@@ -708,9 +621,6 @@
       .section-heading { font-size: 32px !important; }
       .grid-cols-responsive { grid-template-columns: 1fr !important; }
       .two-col { flex-direction: column !important; }
-      .whitepaper-layout { gap: 30px !important; }
-      .whitepaper-form-col { order: -1; }
-      .whitepaper-preview-col { order: 1; }
       .px-main { padding-left: 20px !important; padding-right: 20px !important; }
       .founders-text { font-size: 24px !important; }
       .workflow-layout { flex-direction: column !important; }
@@ -778,7 +688,7 @@
         <a href="verticals-es.html" class="nav-link">
           Industrias
         </a>
-        <a href="#insights" class="nav-link nav-link-optional">
+        <a href="insights-es.html" class="nav-link nav-link-optional">
           Recursos
         </a>
         <a href="es.html#contact" class="nav-link nav-link-primary">
@@ -995,89 +905,7 @@
         <p style="font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; max-width: 760px;">
           Descarg&aacute; la guía de operaciones con IA (22 p&aacute;ginas) para priorizar casos, definir gobernanza y pasar de pilotos a producci&oacute;n.
         </p>
-        <a href="#insights" class="btn-secondary">Descargar guía</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== INSIGHTS / WHITEPAPER ===== -->
-  <section id="insights" class="dot-grid" style="background: var(--bg-surface); border-bottom: 1px solid var(--border);">
-    <div class="container px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
-      <div class="section-label reveal" style="margin-bottom: 24px;">Guía</div>
-      <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.15; margin-bottom: 16px; max-width: 760px;">
-        Descarg&aacute; la guía de operaciones con IA
-      </h2>
-      <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 760px; margin-bottom: 64px;">
-        Guía práctica de 22 p&aacute;ginas para líderes de operaciones. Descarga inmediata al enviar el formulario.
-      </p>
-
-      <div class="two-col whitepaper-layout" style="display: flex; gap: 48px; align-items: flex-start;">
-        <div style="flex: 1;" class="reveal reveal-delay-1 whitepaper-preview-col">
-          <div class="resource-grid" style="grid-template-columns: 1fr; max-width: 340px;">
-            <article class="resource-card whitepaper-preview" aria-label="Tarjeta resumen de whitepaper">
-              <div class="whitepaper-preview-head">
-                <span class="whitepaper-preview-kicker">Guía en español</span>
-                <span class="whitepaper-preview-date">Marzo 2026</span>
-              </div>
-              <h3 class="font-display" style="font-size: 26px; line-height: 1.15; letter-spacing: -0.7px; margin-bottom: 10px;">Guía de operaciones con IA</h3>
-              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">Marco práctico para priorizar casos, definir gobernanza y ejecutar con resultados medibles.</p>
-              <ul class="whitepaper-preview-list">
-                <li><span>01</span>C&oacute;mo priorizar iniciativas de IA por impacto operativo real, no por moda.</li>
-                <li><span>02</span>Modelo de gobernanza con responsables, m&eacute;tricas y rutinas de ejecuci&oacute;n.</li>
-                <li><span>03</span>Ruta de implementaci&oacute;n para pasar de pilotos aislados a resultados en producci&oacute;n.</li>
-              </ul>
-              <div class="whitepaper-preview-footer">PDF &middot; 22 p&aacute;ginas &middot; incluye plantillas</div>
-            </article>
-          </div>
-          <p style="margin-top: 14px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
-            &iquest;La prefer&iacute;s en ingl&eacute;s? Abrí la versión
-            <a href="index.html#insights" onclick="localStorage.setItem('lang_chosen','en')" style="color: var(--text-secondary);">EN</a>.
-          </p>
-        </div>
-
-        <div style="flex: 1;" class="reveal reveal-delay-2 whitepaper-form-col">
-          <form id="whitepaper-form" aria-label="Formulario de descarga de guía" action="https://formsubmit.co/hello@getimpactia.com" method="POST" style="display: flex; flex-direction: column; gap: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px;">
-            <input type="hidden" name="_subject" value="Nuevo lead de guía desde sitio Impactia">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="">
-            <input type="text" name="_honey" style="display:none">
-            <input type="hidden" name="source" value="website-playbook">
-            <div>
-              <label for="wp-name-es">Nombre</label>
-              <input id="wp-name-es" type="text" name="name" placeholder="Tu nombre completo" required>
-            </div>
-            <div>
-              <label for="wp-email-es">Email laboral</label>
-              <input id="wp-email-es" type="email" name="email" placeholder="you@company.com" required>
-            </div>
-            <div>
-              <label for="wp-company-es">Empresa (opcional)</label>
-              <input id="wp-company-es" type="text" name="company" placeholder="Tu empresa">
-            </div>
-            <div>
-              <label for="wp-role-es">Rol (opcional)</label>
-              <input id="wp-role-es" type="text" name="role" placeholder="CEO, COO, Ops Lead...">
-            </div>
-            <input type="hidden" name="whitepaper_language" value="es">
-            <button type="submit" class="btn-secondary" style="width: 100%; height: 52px;">Descargar guía</button>
-            <p class="whitepaper-form-note">
-              Sin spam. Enviamos un único correo con la guía. Privacidad o datos:
-              <a href="#contact">Contactanos</a>.
-            </p>
-          </form>
-
-          <div id="whitepaper-success" aria-live="polite" style="display: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 40px 28px; text-align: center;">
-            <div style="width: 56px; height: 56px; margin: 0 auto 20px; border-radius: 50%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center;">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-            <h3 class="font-display" style="font-size: 28px; letter-spacing: -1px; margin-bottom: 10px;">Tu guía está lista.</h3>
-            <p style="font-size: 16px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px;">La descarga debería iniciar automáticamente.</p>
-            <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-              Si no empezó,
-              <a id="whitepaper-manual-link" class="whitepaper-manual-link" href="assets/whitepapers/impactia-whitepaper-es.pdf" download="Impactia_Whitepaper_ES.pdf">descargala manualmente</a>.
-            </p>
-          </div>
-        </div>
+        <a href="insights-es.html" class="btn-secondary">Descargar guía</a>
       </div>
     </div>
   </section>
@@ -1777,50 +1605,6 @@
       });
     });
 
-    // Whitepaper gated download
-    document.getElementById('whitepaper-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const form = this;
-      const btn = form.querySelector('button[type="submit"]');
-      const manualLink = document.getElementById('whitepaper-manual-link');
-      const language = 'es';
-      const files = {
-        en: { href: 'assets/whitepapers/impactia-whitepaper-en.pdf', name: 'Impactia_Whitepaper_EN.pdf' },
-        es: { href: 'assets/whitepapers/impactia-whitepaper-es.pdf', name: 'Impactia_Whitepaper_ES.pdf' }
-      };
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      }).then(function(res) {
-        if (res.ok || res.status === 200) {
-          const asset = files[language] || files.es;
-          if (manualLink) {
-            manualLink.href = asset.href;
-            manualLink.setAttribute('download', asset.name);
-          }
-          const link = document.createElement('a');
-          link.href = asset.href;
-          link.download = asset.name;
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-          form.style.display = 'none';
-          document.getElementById('whitepaper-success').style.display = 'block';
-        } else {
-          btn.textContent = 'Descargar guía';
-          btn.disabled = false;
-          alert('Algo salió mal. Probá enviándonos un mail a hello@getimpactia.com');
-        }
-      }).catch(function() {
-        btn.textContent = 'Descargar guía';
-        btn.disabled = false;
-        alert('Algo salió mal. Probá enviándonos un mail a hello@getimpactia.com');
-      });
-    });
-
     // Timeline fill activation
     const timelineObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1855,7 +1639,6 @@
         'form', '.workflow-svg-wrap', 'nav', 'footer',
         '.founders-frame', '.step-card', '.pillar-card',
         '.wc-card', '.timeline-step', '.editorial-item'
-        , '#insights', '.insight-cta', '.resource-card'
       ].join(',');
 
       function rand(min, max) { return Math.random() * (max - min) + min; }
