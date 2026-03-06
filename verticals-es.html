@@ -8,10 +8,36 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.svg">
 
+  <!-- SEO: Canonical & Hreflang -->
+  <link rel="canonical" href="https://getimpactia.com/verticals-es.html">
+  <link rel="alternate" hreflang="en" href="https://getimpactia.com/verticals.html">
+  <link rel="alternate" hreflang="es" href="https://getimpactia.com/verticals-es.html">
+  <link rel="alternate" hreflang="x-default" href="https://getimpactia.com/verticals.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getimpactia.com/verticals-es.html">
+  <meta property="og:title" content="Impactia — IA por Industria">
+  <meta property="og:description" content="Cómo la IA transforma operaciones en fintech, salud, retail y logística. Aplicaciones reales, no teoría.">
+  <meta property="og:image" content="https://getimpactia.com/assets/og-image.png">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Impactia">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Impactia — IA por Industria">
+  <meta name="twitter:description" content="Cómo la IA transforma operaciones en fintech, salud, retail y logística. Aplicaciones reales, no teoría.">
+  <meta name="twitter:image" content="https://getimpactia.com/assets/og-image.png">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+
+  <script>document.documentElement.classList.add('js');</script>
 
   <style>
     :root {
@@ -20,8 +46,8 @@
       --bg-elevated: #16161d;
       --bg-card: #1a1a22;
       --text-primary: #e8e6e3;
-      --text-secondary: #7a7872;
-      --text-muted: #45443f;
+      --text-secondary: #9f9c95;
+      --text-muted: #84817a;
       --accent: #e63926;
       --accent-soft: rgba(230, 57, 38, 0.12);
       --accent-glow: rgba(230, 57, 38, 0.25);
@@ -46,6 +72,22 @@
       color: var(--text-primary);
       overflow-x: hidden;
     }
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateY(-120%);
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      z-index: 1000;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      border-radius: 0 0 6px 0;
+    }
+    .skip-link:focus { transform: translateY(0); }
 
     /* Grain overlay */
     body::after {
@@ -106,12 +148,16 @@
     }
 
     .reveal {
+      opacity: 1;
+      transform: none;
+    }
+    .js .reveal {
       opacity: 0;
       transform: translateY(32px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .reveal.visible {
+    .js .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -136,6 +182,60 @@
       background: rgba(5, 5, 8, 0.8);
       border-bottom: 1px solid var(--border);
     }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      justify-content: flex-end;
+    }
+    .nav-link,
+    .nav-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--text-primary);
+    }
+    .nav-link-primary {
+      color: var(--text-primary);
+    }
+    .nav-label {
+      color: var(--accent);
+    }
+    .nav-lang {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-lang:hover,
+    .nav-lang:focus-visible {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
 
     .btn-primary {
       display: inline-flex;
@@ -156,6 +256,15 @@
     .btn-primary:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 24px -4px var(--accent-glow);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .anim-icon svg { width: 100%; height: 100%; }
@@ -221,42 +330,84 @@
       z-index: 50;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      body::after,
+      #particle-canvas {
+        display: none !important;
+      }
+    }
+
     @media (max-width: 768px) {
       .hero-heading { font-size: 38px !important; letter-spacing: -1px !important; }
       .section-heading { font-size: 32px !important; }
       .two-col { flex-direction: column !important; gap: 40px !important; }
       .px-main { padding-left: 20px !important; padding-right: 20px !important; }
       .use-case-grid { gap: 8px !important; }
+      .nav-inner { padding: 12px 14px; align-items: flex-start; }
+      .nav-links { gap: 10px 14px; flex-wrap: wrap; justify-content: flex-end; max-width: 66%; }
+      .nav-link,
+      .nav-label { font-size: 11px; letter-spacing: 0.08em; }
+      .nav-lang { padding: 4px 8px; }
     }
   </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Impactia — IA por Industria",
+    "description": "Cómo la IA transforma operaciones en fintech, salud, retail y logística. Aplicaciones reales, no teoría.",
+    "url": "https://getimpactia.com/verticals-es.html",
+    "inLanguage": "es",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Impactia",
+      "url": "https://getimpactia.com"
+    }
+  }
+  </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
 
   <!-- ===== PARTICLE FIELD ===== -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- NAV -->
   <nav>
-    <div style="max-width: 1280px; margin: 0 auto; padding: 16px 64px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="es.html" style="text-decoration: none;">
+    <div class="nav-inner">
+      <a href="es.html" style="text-decoration: none;" aria-label="Impactia inicio">
             <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
               <text x="0" y="21" font-family="'Bricolage Grotesque', serif" font-size="20" font-weight="800" fill="var(--text-primary)" letter-spacing="-0.5">Impactia</text>
               <rect x="97" y="4" width="6" height="6" rx="1" fill="var(--accent)" opacity="0.9"/>
             </svg>
           </a>
-      <div style="display: flex; align-items: center; gap: 32px;">
-        <span class="font-mono" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Industrias</span>
-        <a href="es.html#contact" style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.3s;"
-           onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'">
+      <div class="nav-links">
+        <span class="nav-label">Industrias</span>
+        <a href="es.html#contact" class="nav-link nav-link-primary">
           Hablemos &rarr;
         </a>
-        <a href="verticals.html" onclick="localStorage.setItem('lang_chosen','en')" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; transition: color 0.3s, border-color 0.3s;"
-           onmouseover="this.style.color='var(--text-primary)';this.style.borderColor='var(--border-hover)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'">
+        <a href="verticals.html" onclick="localStorage.setItem('lang_chosen','en')" class="nav-lang">
           EN
         </a>
       </div>
     </div>
   </nav>
+
+  <main id="main-content">
 
   <!-- HERO -->
   <section class="gradient-mesh dot-grid" style="min-height: 70vh; display: flex; align-items: center; position: relative; overflow: hidden;">
@@ -268,14 +419,14 @@
           <span style="color: var(--text-secondary);">Ese es el punto.</span>
         </h1>
         <p class="reveal reveal-delay-2" style="font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 560px;">
-          Cada industria tiene operaciones distintas, datos distintos, cuellos de botella distintos. Aprendemos los detalles de la tuya antes de construir nada. Así se ve en la práctica.
+          Cada industria tiene operaciones distintas, datos distintos, cuellos de botella distintos. Aprendemos los detalles de la tuya antes de construir nada. As&iacute; lo llevamos a la pr&aacute;ctica.
         </p>
       </div>
     </div>
   </section>
 
 
-  <!-- ===== FINTECH & BANKING ===== -->
+  <!-- ===== FINTECH &amp; BANKING ===== -->
   <section class="vertical-section">
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
 
@@ -283,7 +434,7 @@
         <div style="flex: 1.1;">
           <div class="section-label reveal" style="margin-bottom: 24px;">Fintech y Banca</div>
           <h2 class="font-display section-heading reveal reveal-delay-1" style="font-size: 44px; font-weight: 800; letter-spacing: -2px; color: var(--text-primary); line-height: 1.1; margin-bottom: 24px;">
-            El compliance es lento.<br>La IA lo hace instantáneo.
+            Cumplir con la normativa es lento.<br>La IA lo acelera de forma radical.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
             Los servicios financieros se ahogan en revisión manual — KYC, monitoreo de transacciones, verificación de documentos. Son tareas de reconocimiento de patrones a escala. Exactamente para lo que la IA está hecha.
@@ -336,7 +487,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Extracción de documentos, verificación de identidad, scoring de riesgo — automatizado de punta a punta. Lo que le toma horas a un equipo de compliance sucede en segundos. El agente lee el documento, lo cruza contra listas de vigilancia, marca anomalías y produce un reporte listo para decisión.
+                Extracción de documentos, verificación de identidad, evaluaci&oacute;n de riesgo — automatizado de punta a punta. Lo que le toma horas a un equipo de cumplimiento normativo sucede en segundos. El agente lee el documento, lo cruza contra listas de vigilancia, marca anomalías y produce un reporte listo para decisión.
               </p>
             </div>
           </div>
@@ -348,7 +499,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Análisis de patrones en tiempo real en flujos de transacciones. En vez de reportes batch al final del día, la IA marca actividad sospechosa en el momento — anomalías de velocidad, inconsistencias geográficas, desviaciones de comportamiento. Menos falsos positivos, respuesta más rápida.
+                Análisis de patrones en tiempo real en flujos de transacciones. En vez de reportes por lote al final del día, la IA marca actividad sospechosa en el momento — anomalías de velocidad, inconsistencias geográficas, desviaciones de comportamiento. Menos falsos positivos, respuesta más rápida.
               </p>
             </div>
           </div>
@@ -382,7 +533,7 @@
             Los médicos no deberían gastar su tiempo en papeleo.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Las operaciones de salud son pesadas en documentación, triage y coordinación. La mayoría de ese trabajo sigue patrones predecibles — el tipo que la IA maneja bien. Ponemos a los médicos de vuelta en el trabajo clínico.
+            Las operaciones de salud son pesadas en documentaci&oacute;n, triaje y coordinaci&oacute;n. La mayoría de ese trabajo sigue patrones predecibles — el tipo de trabajo que la IA maneja bien. Devolvemos tiempo cl&iacute;nico a los m&eacute;dicos.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -413,11 +564,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Triage de Pacientes</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Triaje de Pacientes</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                IA que lee síntomas, historial médico y señales de urgencia para rutear pacientes correctamente. No reemplaza el criterio clínico — es un filtro que asegura que los casos correctos lleguen a las personas correctas más rápido. Funciona en chat, intake telefónico y formularios web.
+                IA que lee síntomas, historial médico y señales de urgencia para derivar pacientes correctamente. No reemplaza el criterio clínico — es un filtro que asegura que los casos correctos lleguen a las personas correctas más rápido. Funciona en chat, admisi&oacute;n telef&oacute;nica y formularios web.
               </p>
             </div>
           </div>
@@ -429,7 +580,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Notas de consulta, resúmenes de alta, cartas de derivación — generados a partir de datos estructurados e input del médico. Reduce el tiempo de documentación de horas a minutos. Los outputs cumplen con tus templates y requisitos de compliance.
+                Notas de consulta, resúmenes de alta, cartas de derivación — generados a partir de datos estructurados e informaci&oacute;n del m&eacute;dico. Reduce el tiempo de documentación de horas a minutos. Los resultados respetan tus plantillas y requisitos de cumplimiento normativo.
               </p>
             </div>
           </div>
@@ -441,7 +592,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Agendamiento de turnos, verificación de seguros, workflows de autorización previa. Estos procesos tienen reglas claras y alto volumen — ideales para IA. El sistema maneja el flujo estándar y escala las excepciones al staff.
+                Agendamiento de turnos, verificación de seguros, flujos de autorizaci&oacute;n previa. Estos procesos tienen reglas claras y alto volumen — ideales para IA. El sistema maneja el flujo estándar y escala las excepciones al equipo.
               </p>
             </div>
           </div>
@@ -452,7 +603,7 @@
   </section>
 
 
-  <!-- ===== RETAIL & E-COMMERCE ===== -->
+  <!-- ===== RETAIL &amp; E-COMMERCE ===== -->
   <section class="vertical-section">
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
 
@@ -463,7 +614,7 @@
             Cada interacción con el cliente es una operación.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Retail a escala significa miles de conversaciones simultáneas — devoluciones, tracking, preguntas de productos, quejas. Cada una sigue un patrón. La IA maneja el patrón. Tu equipo maneja las excepciones.
+            Retail a escala significa miles de conversaciones simultáneas — devoluciones, seguimiento de env&iacute;os, preguntas de productos y quejas. Cada una sigue un patrón. La IA maneja el patrón. Tu equipo maneja las excepciones.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -512,7 +663,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Un agente que conoce tu catálogo de productos, tus políticas de devolución, tu estado de envío en tiempo real. Maneja tracking de pedidos, devoluciones, cambios y preguntas de productos en cada canal — web chat, WhatsApp, email. Resuelve los casos estándar. Rutea los complejos.
+                Un agente que conoce tu catálogo de productos, tus políticas de devolución, tu estado de envío en tiempo real. Gestiona el seguimiento de pedidos, devoluciones, cambios y preguntas de productos en cada canal — chat web, WhatsApp y correo electr&oacute;nico. Resuelve los casos estándar. Deriva los casos complejos.
               </p>
             </div>
           </div>
@@ -524,7 +675,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                IA que entiende tu catálogo profundamente — no solo keywords, sino atributos, compatibilidad, casos de uso. Potencia motores de recomendación, búsqueda y descubrimiento conversacional de productos. Los clientes describen lo que necesitan, el sistema lo encuentra.
+                IA que entiende tu catálogo profundamente — no solo palabras clave, sino atributos, compatibilidad, casos de uso. Potencia motores de recomendación, búsqueda y descubrimiento conversacional de productos. Los clientes describen lo que necesitan, el sistema lo encuentra.
               </p>
             </div>
           </div>
@@ -536,7 +687,7 @@
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Alertas de inventario, triggers de reorden, comunicación con proveedores, manejo de excepciones — workflows automatizados que mantienen la operación corriendo sin intervención manual. Cuando algo rompe el patrón, el sistema lo marca y lo rutea a la persona correcta.
+                Alertas de inventario, disparadores de reorden, comunicación con proveedores, manejo de excepciones — flujos automatizados que mantienen la operación corriendo sin intervención manual. Cuando algo rompe el patrón, el sistema lo marca y lo rutea a la persona correcta.
               </p>
             </div>
           </div>
@@ -547,7 +698,7 @@
   </section>
 
 
-  <!-- ===== LOGISTICS & SUPPLY CHAIN ===== -->
+  <!-- ===== LOGISTICS &amp; SUPPLY CHAIN ===== -->
   <section class="vertical-section">
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 120px 64px;">
 
@@ -558,7 +709,7 @@
             Mové más rápido con la misma infraestructura.
           </h2>
           <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 480px;">
-            Logística es coordinación a escala — carriers, depósitos, conductores, clientes, excepciones. Cada demora cuesta plata. La IA no elimina la complejidad, pero la procesa en tiempo real en vez de después del hecho.
+            Logística es coordinación a escala — transportistas, dep&oacute;sitos, conductores, clientes y excepciones. Cada demora cuesta plata. La IA no elimina la complejidad, pero la procesa en tiempo real en vez de después del hecho.
           </p>
         </div>
         <div style="flex: 1; padding-top: 48px;">
@@ -614,11 +765,11 @@
         <div class="app-block">
           <div class="two-col" style="display: flex; gap: 48px; align-items: baseline;">
             <div style="flex: 0 0 200px;">
-              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Coordinación de Carriers</span>
+              <span class="font-mono" style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Coordinaci&oacute;n de Transportistas</span>
             </div>
             <div style="flex: 1;">
               <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary);">
-                Comunicación automatizada con carriers — booking, actualizaciones de tracking, manejo de excepciones, monitoreo de SLAs. Cuando un envío se demora, el sistema lo detecta, notifica a las personas correctas y dispara workflows de contingencia. Nadie revisa una planilla.
+                Comunicación automatizada con transportistas — reservas, actualizaciones de seguimiento, manejo de excepciones y monitoreo de SLA. Cuando un env&iacute;o se demora, el sistema lo detecta, notifica a las personas correctas y activa flujos de contingencia. Nadie revisa una planilla.
               </p>
             </div>
           </div>
@@ -649,7 +800,7 @@
           Distinta industria.<br>Misma disciplina.
         </h2>
         <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 40px;">
-          Aprendemos tu operación, encontramos dónde encaja la IA, construimos el sistema y lo operamos. La vertical cambia. El approach no.
+          Aprendemos tu operación, encontramos dónde encaja la IA, construimos el sistema y lo operamos. La vertical cambia. El enfoque no.
         </p>
         <a href="es.html#contact" class="btn-primary reveal reveal-delay-3">Hablemos</a>
       </div>
@@ -657,17 +808,19 @@
   </section>
 
 
+  </main>
+
   <!-- FOOTER -->
   <footer style="background: var(--bg-deep); border-top: 1px solid var(--border);">
     <div class="px-main" style="max-width: 1280px; margin: 0 auto; padding: 40px 64px; display: flex; align-items: center; justify-content: space-between;">
-      <a href="es.html" style="text-decoration: none;">
+      <a href="es.html" style="text-decoration: none;" aria-label="Impactia inicio">
           <svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
             <text x="0" y="21" font-family="'Bricolage Grotesque', serif" font-size="20" font-weight="800" fill="var(--text-primary)" letter-spacing="-0.5">Impactia</text>
             <rect x="97" y="4" width="6" height="6" rx="1" fill="var(--accent)" opacity="0.9"/>
           </svg>
         </a>
       <div style="display: flex; align-items: center; gap: 32px;">
-        <span class="font-mono" style="font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em;">Built with Arc</span>
+        <span class="font-mono" style="font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em;">Impulsado por Arc</span>
         <a href="mailto:hello@getimpactia.com" style="font-size: 13px; color: var(--text-secondary); text-decoration: none;">hello@getimpactia.com</a>
         <span style="font-size: 13px; color: var(--text-muted);">&copy; 2026 Impactia</span>
       </div>
@@ -687,8 +840,14 @@
     (function() {
       const canvas = document.getElementById('particle-canvas');
       const ctx = canvas.getContext('2d');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        canvas.style.display = 'none';
+        return;
+      }
       let W, H, scrollY = 0, particles = [];
       let occlusionRects = [];
+      let needsOcclusionUpdate = true;
+      let lastOcclusionUpdate = 0;
 
       const LAYERS = [
         { count: 35, size: [1, 2.2],   glow: 6,  opacity: [0.12, 0.25], parallax: 0.03, drift: 0.15 },
@@ -720,7 +879,9 @@
         }
       }
 
-      setInterval(updateOcclusionRects, 200);
+      function scheduleOcclusionUpdate() {
+        needsOcclusionUpdate = true;
+      }
 
       function isOccluded(px, py) {
         for (let i = 0; i < occlusionRects.length; i++) {
@@ -757,7 +918,13 @@
 
       function draw() {
         ctx.clearRect(0, 0, W, H);
-        const t = performance.now() * 0.001;
+        const now = performance.now();
+        const t = now * 0.001;
+        if (needsOcclusionUpdate && now - lastOcclusionUpdate > 250) {
+          updateOcclusionRects();
+          lastOcclusionUpdate = now;
+          needsOcclusionUpdate = false;
+        }
 
         for (let i = 0; i < particles.length; i++) {
           const p = particles[i];
@@ -804,12 +971,12 @@
         requestAnimationFrame(draw);
       }
 
-      window.addEventListener('resize', () => { resize(); createParticles(); });
-      window.addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+      window.addEventListener('resize', () => { resize(); createParticles(); scheduleOcclusionUpdate(); });
+      window.addEventListener('scroll', () => { scrollY = window.scrollY; scheduleOcclusionUpdate(); }, { passive: true });
 
       resize();
       createParticles();
-      updateOcclusionRects();
+      scheduleOcclusionUpdate();
       draw();
     })();
   </script>

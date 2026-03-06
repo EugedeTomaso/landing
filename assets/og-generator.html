@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    max-height: 630px;
+    overflow: hidden;
+    background: #050508;
+    font-family: 'DM Sans', sans-serif;
+    position: relative;
+  }
+
+  /* Dot grid */
+  .dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Gradient glow */
+  .glow {
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse, rgba(230, 57, 38, 0.18) 0%, transparent 70%);
+    filter: blur(80px);
+  }
+
+  .glow-2 {
+    position: absolute;
+    bottom: -300px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(230, 57, 38, 0.08) 0%, transparent 70%);
+    filter: blur(100px);
+  }
+
+  /* Content */
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 630px;
+    padding: 70px 90px;
+  }
+
+  /* Logo */
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .logo-icon {
+    width: 52px;
+    height: 52px;
+  }
+  .logo-text {
+    font-family: 'Bricolage Grotesque', serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #e8e6e3;
+    letter-spacing: -1px;
+  }
+
+  /* Title */
+  h1 {
+    font-family: 'Bricolage Grotesque', serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: #e8e6e3;
+    line-height: 1.08;
+    letter-spacing: -2.5px;
+    max-width: 900px;
+    margin-bottom: 28px;
+  }
+  h1 span {
+    color: #9f9c95;
+  }
+
+  /* Tagline */
+  .tagline {
+    font-size: 22px;
+    color: #9f9c95;
+    line-height: 1.5;
+    max-width: 700px;
+  }
+
+  /* Accent line */
+  .accent-line {
+    position: absolute;
+    top: 625px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #e63926;
+  }
+
+  /* Border */
+  .border-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1200px;
+    height: 630px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Clip everything to OG dimensions */
+  .og-clip {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+<div class="og-clip">
+  <div class="dot-grid"></div>
+  <div class="glow"></div>
+  <div class="glow-2"></div>
+  <div class="border-frame"></div>
+
+  <div class="content">
+    <div class="logo-row">
+      <svg class="logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="14" fill="#050508" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        <circle cx="32" cy="32" r="22" fill="#e63926"/>
+        <path d="M24 18H40V24H35V40H40V46H24V40H29V24H24V18Z" fill="#050508"/>
+      </svg>
+      <span class="logo-text">Impactia</span>
+    </div>
+
+    <h1>AI Transformation<br>End-to-End. <span>Measurable.</span></h1>
+
+    <p class="tagline">From isolated AI pilots to enterprise-wide transformation with method, execution, and governance.</p>
+  </div>
+
+  <div class="accent-line"></div>
+</div>
+</body>
+</html>
