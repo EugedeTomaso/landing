@@ -919,7 +919,7 @@
         Transformaci&oacute;n de IA de punta a punta.
       </h2>
       <p class="reveal reveal-delay-2" style="font-size: 17px; line-height: 1.75; color: var(--text-secondary); max-width: 540px; margin-bottom: 80px;">
-        Ejecutamos un modelo propio: IATM. Tres etapas de ejecuci&oacute;n con entregables concretos, desde diagn&oacute;stico y priorizaci&oacute;n hasta implementaci&oacute;n, gobernanza y escala.
+        Ejecutamos un modelo propio: IATM. Cuatro etapas de ejecuci&oacute;n con entregables concretos, desde diagn&oacute;stico y priorizaci&oacute;n hasta implementaci&oacute;n, gobernanza y escala.
       </p>
 
       <!-- Timeline -->
@@ -962,8 +962,52 @@
           </div>
         </div>
 
-        <!-- Phase 2: Construir -->
+        <!-- Phase 2: Priorizar -->
         <div class="reveal reveal-delay-2" style="display: flex; gap: 40px; margin-bottom: 64px; position: relative;">
+          <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+            <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                <!-- Blueprint / architecture grid -->
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="var(--accent)" stroke-width="1.5" fill="none" opacity="0.4"/>
+                <!-- Blocks being placed -->
+                <rect x="5" y="5" width="6" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0.6;0.6" dur="2s" fill="freeze"/>
+                </rect>
+                <rect x="13" y="5" width="6" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0.4;0.4" dur="2s" fill="freeze"/>
+                </rect>
+                <rect x="5" y="11" width="14" height="4" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.3;0.3" dur="2.5s" fill="freeze"/>
+                </rect>
+                <rect x="5" y="17" width="6" height="2" rx="1" fill="var(--accent)" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0;0.2" dur="3s" fill="freeze"/>
+                </rect>
+                <!-- Connection lines between blocks -->
+                <line x1="8" y1="9" x2="8" y2="11" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.5;0.5" dur="2.5s" fill="freeze"/>
+                </line>
+                <line x1="16" y1="9" x2="16" y2="11" stroke="var(--accent)" stroke-width="0.8" opacity="0">
+                  <animate attributeName="opacity" values="0;0;0;0.5;0.5" dur="2.5s" fill="freeze"/>
+                </line>
+              </svg>
+            </div>
+          </div>
+          <div style="flex: 1; padding-top: 4px;">
+            <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">02</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Priorizar</h3>
+            </div>
+            <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
+              Evaluamos oportunidades por impacto de negocio, esfuerzo de implementaci&oacute;n, disponibilidad de datos y complejidad del cambio. Las ideas se convierten en un roadmap priorizado por ROI.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              Entregable: roadmap de transformaci&oacute;n con secuencia de MVPs priorizada e impacto esperado.
+            </p>
+          </div>
+        </div>
+
+        <!-- Phase 3: Implementar -->
+        <div class="reveal reveal-delay-3" style="display: flex; gap: 40px; margin-bottom: 64px; position: relative;">
           <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
             <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
               <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
@@ -993,17 +1037,20 @@
           </div>
           <div style="flex: 1; padding-top: 4px;">
             <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
-              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">02</span>
-              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Priorizar e implementar MVPs</h3>
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">03</span>
+              <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Implementar</h3>
             </div>
             <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
-              Evaluamos oportunidades por impacto, esfuerzo y factibilidad. Luego desplegamos MVPs en producci&oacute;n integrados en procesos reales, no demos aisladas.
+              Desplegamos MVPs en producci&oacute;n integrados en procesos reales, no demos aisladas. Cada sistema se construye para operar dentro de tu organizaci&oacute;n desde el d&iacute;a uno.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              Entregable: MVPs en producci&oacute;n conectados a flujos de trabajo reales y datos operativos.
             </p>
           </div>
         </div>
 
-        <!-- Phase 3: Operar -->
-        <div class="reveal reveal-delay-3" style="display: flex; gap: 40px; position: relative;">
+        <!-- Phase 4: Gobernar y escalar -->
+        <div class="reveal reveal-delay-4" style="display: flex; gap: 40px; position: relative;">
           <div style="flex: 0 0 48px; display: flex; flex-direction: column; align-items: center; z-index: 1;">
             <div class="anim-icon" style="width: 48px; height: 48px; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
               <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
@@ -1019,7 +1066,6 @@
                 </circle>
                 <!-- Status bar top -->
                 <circle cx="5" cy="6" r="1" fill="var(--accent)" opacity="0.5">
-                  <animate attributeName="fill" values="var(--accent);var(--accent);var(--accent)" dur="3s" repeatCount="indefinite"/>
                   <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2s" repeatCount="indefinite"/>
                 </circle>
                 <line x1="8" y1="6" x2="14" y2="6" stroke="var(--accent)" stroke-width="0.8" opacity="0.25"/>
@@ -1028,11 +1074,14 @@
           </div>
           <div style="flex: 1; padding-top: 4px;">
             <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px;">
-              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">03</span>
+              <span class="font-mono" style="font-size: 11px; color: var(--accent); letter-spacing: 0.15em;">04</span>
               <h3 class="font-display" style="font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px;">Gobernar y escalar</h3>
             </div>
             <p style="font-size: 15px; line-height: 1.7; color: var(--text-secondary); max-width: 520px; margin-bottom: 16px;">
               Operamos cadencias, m&eacute;tricas y optimizaci&oacute;n continua para que la transformaci&oacute;n se sostenga y escale por equipos y unidades.
+            </p>
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-muted); max-width: 520px;">
+              Entregable: modelo de gobernanza con responsables de KPI y plan de escala medible.
             </p>
           </div>
         </div>
